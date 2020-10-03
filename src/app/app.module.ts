@@ -9,7 +9,7 @@ import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from '../environments/environment';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {AppConfigService} from "./service-app-config/app-config.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {CampusComponent} from './campus/campus.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
@@ -19,7 +19,6 @@ import {WebBaseComponent} from './web-base/web-base.component';
 import {DaysDisplayComponent} from './campus/days-display/days-display.component';
 import {MenuDisplayComponent} from "./campus/menu-display/menu-display.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {registerLocaleData} from "@angular/common";
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
@@ -29,15 +28,12 @@ import {ImageListComponent} from './image-list/image-list.component';
 import {SettingsComponent} from './settings/settings.component';
 import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {LanguageLoader} from "./service-settings/language-loader";
 
 
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeNl, 'nl');
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
 
 @NgModule({
   declarations: [
@@ -67,8 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       defaultLanguage: 'nl',
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
+        useClass: LanguageLoader
       },
     }),
     FontAwesomeModule,
