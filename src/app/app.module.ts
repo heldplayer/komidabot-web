@@ -8,7 +8,7 @@ import {DefaultComponent} from './default/default.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from '../environments/environment';
 import {ErrorPageComponent} from './error-page/error-page.component';
-import {AppConfigService} from "./app-config.service";
+import {AppConfigService} from "./service-app-config/app-config.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {CampusComponent} from './campus/campus.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';

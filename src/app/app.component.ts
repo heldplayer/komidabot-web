@@ -4,7 +4,7 @@ import {DeviceDetectorService} from "ngx-device-detector";
 import {SwUpdate} from "@angular/service-worker";
 import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
-import {SettingsService} from "./settings.service";
+import {SettingsService} from "./service-settings/settings.service";
 import {Router} from "@angular/router";
 import {faCog} from "@fortawesome/free-solid-svg-icons";
 

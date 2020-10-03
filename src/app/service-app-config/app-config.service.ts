@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Observable, ReplaySubject} from "rxjs";
+import {default as configJsonDev} from "./config-dev.json";
+import {default as configJson} from "./config.json";
 
 @Injectable({
   providedIn: 'root'
@@ -9,24 +10,21 @@ export class AppConfigService {
 
   private appConfig = new ReplaySubject<AppConfig>(1);
 
-  constructor(
-    private http: HttpClient,
-  ) {
+  constructor() {
   }
 
   loadAppConfig(): Promise<any> {
     const queryParams = getQueryParams();
     const isDev = queryParams.has('dev') && queryParams.get('dev') === 'true';
 
-    const configLocation = isDev ? '/assets/config-dev.json' : '/assets/config.json';
+    let config = <AppConfig>(isDev ? configJsonDev : configJson);
 
-    return this.http.get<AppConfig>(configLocation)
-      .toPromise()
-      .then((data: any) => {
-        console.log('App config:', data);
-        this.appConfig.next(data);
-        this.appConfig.complete();
-      });
+    console.log('App config:', config);
+
+    this.appConfig.next(config);
+    this.appConfig.complete();
+
+    return Promise.resolve(config);
   }
 
   get config(): Observable<AppConfig> {

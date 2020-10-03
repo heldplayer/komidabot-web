@@ -12,7 +12,7 @@ import {
   MenuItem,
   MenuResponse
 } from "./entities";
-import {AppConfigService} from "./app-config.service";
+import {AppConfigService} from "./service-app-config/app-config.service";
 import {concatMap, map, pluck, shareReplay, switchMap, tap} from "rxjs/operators";
 import * as moment from "moment";
 import {unsafeCast} from "./utils";

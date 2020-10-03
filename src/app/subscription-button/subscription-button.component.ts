@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {merge, Observable, of, Subject} from "rxjs";
-import {AppConfigService} from "../app-config.service";
+import {AppConfigService} from "../service-app-config/app-config.service";
 import {SubscriptionService} from "../subscription.service";
 import {SwPush} from "@angular/service-worker";
 import {catchError, map, take, takeUntil} from "rxjs/operators";

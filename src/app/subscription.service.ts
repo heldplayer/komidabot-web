@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppConfigService} from "./app-config.service";
+import {AppConfigService} from "./service-app-config/app-config.service";
 import {concatMap} from "rxjs/operators";
 
 

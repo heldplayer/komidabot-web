@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {SettingsService} from "../settings.service";
+import {SettingsService} from "../service-settings/settings.service";
 import {CampusService} from "../campus.service";
 import {ApiResponse, Campus} from "../entities";
 import {map} from "rxjs/operators";
-import {AppConfigService} from "../app-config.service";
+import {AppConfigService} from "../service-app-config/app-config.service";
 
 @Component({
   selector: 'app-settings',

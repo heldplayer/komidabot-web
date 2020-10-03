@@ -9,7 +9,7 @@ import {
   MessengerStateValid,
   ThreadContext
 } from "../lib/facebook-messenger";
-import {AppConfigService} from "./app-config.service";
+import {AppConfigService} from "./service-app-config/app-config.service";
 
 interface SupportedFeatures {
   supported_features: string[];
