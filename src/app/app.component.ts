@@ -7,6 +7,7 @@ import {takeUntil} from "rxjs/operators";
 import {SettingsService} from "./service-settings/settings.service";
 import {Router} from "@angular/router";
 import {faCog} from "@fortawesome/free-solid-svg-icons";
+import {SeoService} from "./seo.service";
 
 @Component({
   selector: 'app-component',
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private updateService: CheckForUpdateService,
     // private messengerService: FacebookMessengerService,
     private settings: SettingsService,
+    private seo: SeoService,
   ) {
     this.displaySplash = window.location.pathname == '/pwa_start';
 
@@ -81,6 +83,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onRouterActivate(event: any) {
+    this.seo.setActiveComponent(event);
   }
 
   refreshPage() {

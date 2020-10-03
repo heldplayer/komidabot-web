@@ -60,5 +60,5 @@
 -->
 
 <!--<div>{{deviceInfo | json}}</div>-->
-<router-outlet></router-outlet>
+<router-outlet (activate)="onRouterActivate($event)"></router-outlet>
 <app-splash-screen *ngIf="displaySplash" (delete)="splashComplete()"></app-splash-screen>

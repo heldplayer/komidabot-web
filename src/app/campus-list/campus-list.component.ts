@@ -1,18 +1,19 @@
 import {Component} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {ApiResponse, Campus, ClosingDay, DayClosings} from "../entities";
 import {CampusService} from "../campus.service";
 import * as moment from "moment";
 import {map, shareReplay, tap} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 import {dayToIso, getClosedDisplay} from "../utils";
+import {SeoCompatible, SeoProvider} from "../seo.service";
 
 @Component({
   selector: 'app-campus-list',
   templateUrl: './campus-list.component.html',
   styleUrls: ['./campus-list.component.scss']
 })
-export class CampusListComponent {
+export class CampusListComponent implements SeoCompatible {
 
   campuses$: Observable<ApiResponse<Campus[]>>;
   closingDays$: Observable<ApiResponse<DayClosings>>;
@@ -81,6 +82,13 @@ export class CampusListComponent {
 
   get displayTodayButton(): boolean {
     return moment().isoWeekday() <= 5;
+  }
+
+  get seoProvider(): SeoProvider {
+    return {
+      title: this.translate.get('BROWSER.TITLE.CAMPUS_LIST'),
+      description: of(undefined),
+    };
   }
 }
 

@@ -3,14 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {ErrorPageComponent} from "./error-page/error-page.component";
 import {CampusComponent} from "./campus/campus.component";
 import {PwaStartComponent} from "./pwa-start/pwa-start.component";
-import {WebBaseComponent} from "./web-base/web-base.component";
 import {ImageListComponent} from "./image-list/image-list.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {MenuOverviewComponent} from "./menu-overview/menu-overview.component";
+import {CampusListComponent} from "./campus-list/campus-list.component";
 
 
 const routes: Routes = [
-  {path: '', component: WebBaseComponent, pathMatch: 'full'},
+  {path: '', component: CampusListComponent, pathMatch: 'full'},
   {path: 'pwa_start', component: PwaStartComponent, pathMatch: 'full'},
   // {path: 'base', component: WebBaseComponent},
   // {path: 'debug', component: DebugComponent},

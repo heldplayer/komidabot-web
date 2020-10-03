@@ -15,7 +15,6 @@ import {SplashScreenComponent} from './splash-screen/splash-screen.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
 import {CampusListComponent} from './campus-list/campus-list.component';
 import {SubscriptionButtonComponent} from './subscription-button/subscription-button.component';
-import {WebBaseComponent} from './web-base/web-base.component';
 import {DaysDisplayComponent} from './campus/days-display/days-display.component';
 import {MenuDisplayComponent} from "./campus/menu-display/menu-display.component";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
@@ -47,7 +46,6 @@ registerLocaleData(localeNl, 'nl');
     PwaStartComponent,
     CampusListComponent,
     SubscriptionButtonComponent,
-    WebBaseComponent,
     DaysDisplayComponent,
     LocalizedDatePipe,
     ImageListComponent,
