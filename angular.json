@@ -39,7 +39,8 @@
                 "input": "src/assets/icons",
                 "output": "/"
               },
-              "src/custom-service-worker.js"
+              "src/custom-service-worker.js",
+              "src/robots.txt"
             ],
             "styles": [
               "src/styles.scss"
