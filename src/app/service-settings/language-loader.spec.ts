@@ -1,4 +1,4 @@
-import { LanguageLoader } from './language-loader';
+import {LanguageLoader} from './language-loader';
 
 describe('LanguageLoader', () => {
   it('should create an instance', () => {

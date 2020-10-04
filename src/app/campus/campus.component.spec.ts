@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CampusComponent} from './campus.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 describe('CampusComponent', () => {
   let component: CampusComponent;
@@ -8,6 +10,10 @@ describe('CampusComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: false})
+      ],
       declarations: [CampusComponent]
     })
       .compileComponents();

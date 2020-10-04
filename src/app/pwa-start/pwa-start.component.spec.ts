@@ -1,6 +1,10 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PwaStartComponent} from './pwa-start.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {LanguageLoader} from '../service-settings/language-loader';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('PwaStartComponent', () => {
   let component: PwaStartComponent;
@@ -8,6 +12,17 @@ describe('PwaStartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot({
+          defaultLanguage: 'nl',
+          loader: {
+            provide: TranslateLoader,
+            useClass: LanguageLoader
+          },
+        }),
+        RouterTestingModule,
+        HttpClientTestingModule
+      ],
       declarations: [PwaStartComponent]
     })
       .compileComponents();

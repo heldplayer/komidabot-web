@@ -1,12 +1,26 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SeoService } from './seo.service';
+import {SeoService} from './seo.service';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {LanguageLoader} from './service-settings/language-loader';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SeoService', () => {
   let service: SeoService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot({
+          defaultLanguage: 'nl',
+          loader: {
+            provide: TranslateLoader,
+            useClass: LanguageLoader
+          },
+        }),
+        RouterTestingModule
+      ],
+    });
     service = TestBed.inject(SeoService);
   });
 

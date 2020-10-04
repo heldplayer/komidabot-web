@@ -4,7 +4,6 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {DebugComponent} from './debug/debug.component';
 import {AppComponent} from './app.component';
-import {DefaultComponent} from './default/default.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {ErrorPageComponent} from './error-page/error-page.component';
@@ -38,7 +37,6 @@ registerLocaleData(localeNl, 'nl');
   declarations: [
     AppComponent,
     DebugComponent,
-    DefaultComponent,
     ErrorPageComponent,
     MenuDisplayComponent,
     CampusComponent,

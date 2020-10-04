@@ -20,7 +20,8 @@ export class SubscriptionButtonComponent implements OnInit, OnDestroy {
   constructor(
     private configService: AppConfigService,
     private subscriptionService: SubscriptionService,
-    private swPush: SwPush,) {
+    private swPush: SwPush,
+  ) {
   }
 
   ngOnInit(): void {
