@@ -1,5 +1,5 @@
-import {catchError, distinctUntilChanged, filter, map, startWith} from "rxjs/operators";
-import {combineLatest, merge, Observable, OperatorFunction, pipe} from "rxjs";
+import {catchError, distinctUntilChanged, filter, map, startWith} from 'rxjs/operators';
+import {combineLatest, merge, Observable, OperatorFunction, pipe} from 'rxjs';
 
 export type Translation = Record<string, string>
 
@@ -106,7 +106,7 @@ export class ApiResponse<T> {
   }
 
   public static initial<T>(): OperatorFunction<ApiResponse<T>, ApiResponse<T>> {
-    return startWith(new ApiResponse<T>(ResponseState.LOADING, <T><unknown>null));
+    return startWith(new ApiResponse<T>(ResponseState.LOADING, null as unknown as T));
   }
 
   public static of<T>(): OperatorFunction<T, ApiResponse<T>> {
@@ -114,7 +114,7 @@ export class ApiResponse<T> {
   }
 
   public static error<T>(): OperatorFunction<ApiResponse<T>, ApiResponse<T>> {
-    return catchError((err) => [new ApiResponse<T>(ResponseState.ERROR, <T><unknown>null)]);
+    return catchError((err) => [new ApiResponse<T>(ResponseState.ERROR, null as unknown as T)]);
   }
 
   public static awaitReady<T>(): OperatorFunction<ApiResponse<T>, T> {
@@ -141,12 +141,12 @@ export class ApiResponse<T> {
     const loadedPath: OperatorFunction<ApiResponse<T>, ApiResponse<R>> = pipe(
       filter(response => response.state === ResponseState.LOADED),
       map(response => response.response),
-      (obs: Observable<any>) => <Observable<R>>(<OperatorFunction<any, any>[]>fns).reduce((prev, fn) => fn(prev), obs),
+      (obs: Observable<any>) => (fns as OperatorFunction<any, any>[]).reduce((prev, fn) => fn(prev), obs) as Observable<R>,
       map(value => new ApiResponse(ResponseState.LOADED, value))
     );
     const unloadedPath: OperatorFunction<ApiResponse<T>, ApiResponse<R>> = pipe(
       filter(response => response.state !== ResponseState.LOADED),
-      map(response => <ApiResponse<R>><ApiResponse<unknown>>response)
+      map(response => response as ApiResponse<unknown> as ApiResponse<R>)
     );
     return (obs: Observable<ApiResponse<T>>) => merge(loadedPath(obs), unloadedPath(obs));
   }
@@ -169,9 +169,9 @@ export class ApiResponse<T> {
     return combineLatest(sources).pipe(
       map((responses: ApiResponse<any>[]) => {
         if (responses.find(response => response.state === ResponseState.ERROR)) {
-          return new ApiResponse(ResponseState.ERROR, <any[]><unknown>null);
+          return new ApiResponse(ResponseState.ERROR, null as unknown as any[]);
         } else if (responses.find(response => response.state === ResponseState.LOADING)) {
-          return new ApiResponse(ResponseState.LOADING, <any[]><unknown>null);
+          return new ApiResponse(ResponseState.LOADING, null as unknown as any[]);
         }
         return new ApiResponse(ResponseState.LOADED, responses.map(response => response.response));
       }),

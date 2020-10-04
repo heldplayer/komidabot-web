@@ -1,8 +1,8 @@
-import {TranslateLoader} from "@ngx-translate/core";
-import {Observable, of, throwError} from "rxjs";
-import {default as langEn} from "./i18n/en.json";
-import {default as langNl} from "./i18n/nl.json";
-import {default as langFr} from "./i18n/fr.json";
+import {TranslateLoader} from '@ngx-translate/core';
+import {Observable, of, throwError} from 'rxjs';
+import {default as langEn} from './i18n/en.json';
+import {default as langNl} from './i18n/nl.json';
+import {default as langFr} from './i18n/fr.json';
 
 
 export class LanguageLoader implements TranslateLoader {

@@ -1,7 +1,7 @@
 import {ApplicationRef, Injectable} from '@angular/core';
-import {SwUpdate} from "@angular/service-worker";
-import {first, tap} from "rxjs/operators";
-import {concat, interval} from "rxjs";
+import {SwUpdate} from '@angular/service-worker';
+import {first, tap} from 'rxjs/operators';
+import {concat, interval} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

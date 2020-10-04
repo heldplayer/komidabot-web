@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import * as moment from "moment";
-import {combineLatest, Observable} from "rxjs";
-import {CampusService} from "../campus.service";
-import {ApiResponse, Campus} from "../entities";
-import {map} from "rxjs/operators";
-import {dayToIso} from "../utils";
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import * as moment from 'moment';
+import {combineLatest, Observable} from 'rxjs';
+import {CampusService} from '../campus.service';
+import {ApiResponse, Campus} from '../entities';
+import {map} from 'rxjs/operators';
+import {dayToIso} from '../utils';
 
 @Component({
   selector: 'app-menu-overview',
@@ -27,10 +27,10 @@ export class MenuOverviewComponent {
     ])
       .pipe(
         map((data) => {
-          const params = <Params>data[0];
-          const campuses = <Campus[]>data[1];
+          const params = data[0] as Params;
+          const campuses = data[1] as Campus[];
 
-          const date = moment(params['date']);
+          const date = moment(params.date);
 
           return {
             campuses: campuses.map(campus => campus.short_name),
@@ -41,7 +41,7 @@ export class MenuOverviewComponent {
   }
 
   selectDay(date: moment.Moment | null) {
-    this.router.navigate(['/overview', dayToIso(<moment.Moment>date)])
+    this.router.navigate(['/overview', dayToIso(date as moment.Moment)])
   }
 }
 

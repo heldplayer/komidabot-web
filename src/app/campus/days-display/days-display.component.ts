@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
-import * as moment from "moment";
-import {CampusService} from "../../campus.service";
-import {combineLatest, Observable, ReplaySubject} from "rxjs";
-import {distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
-import {ApiResponse, ClosingDay, ClosingDays} from "../../entities";
-import {dayToIso, getClosedDisplay} from "../../utils";
-import {TranslateService} from "@ngx-translate/core";
-import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import * as moment from 'moment';
+import {CampusService} from '../../campus.service';
+import {combineLatest, Observable, ReplaySubject} from 'rxjs';
+import {distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
+import {ApiResponse, ClosingDay, ClosingDays} from '../../entities';
+import {dayToIso, getClosedDisplay} from '../../utils';
+import {TranslateService} from '@ngx-translate/core';
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-days-display',
@@ -76,7 +76,7 @@ export class DaysDisplayComponent {
             );
         }),
         map((days: ClosingDays) => days.map((closed, index) => ({
-          closed: closed,
+          closed, // shorthand for closed: closed
           day: this.weekStart.clone().add(index, 'days')
         }))),
       );

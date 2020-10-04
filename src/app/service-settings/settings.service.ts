@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import {Observable, of, ReplaySubject, Subject} from "rxjs";
-import {takeUntil, tap} from "rxjs/operators";
+import {TranslateService} from '@ngx-translate/core';
+import {Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {takeUntil, tap} from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Injectable({
@@ -60,7 +60,7 @@ export class SettingsService implements OnDestroy {
     if (value === null) {
       return null;
     }
-    return parseInt(value);
+    return parseInt(value, 10);
   }
 
   private static toStringSafe(value: number | null): string | null {

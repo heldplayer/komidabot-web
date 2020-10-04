@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import * as moment from 'moment';
-import {dayToIso} from "../utils";
+import {dayToIso} from '../utils';
 
 @Component({
   selector: 'app-campus',
@@ -23,10 +23,10 @@ export class CampusComponent {
     this.display$ = this.route.params
       .pipe(
         map((params: Params) => {
-          this.campus = params['campus'];
+          this.campus = params.campus;
 
           if ('date' in params) {
-            const date = moment(params['date']);
+            const date = moment(params.date);
 
             return {
               campus: this.campus,
@@ -38,7 +38,7 @@ export class CampusComponent {
           let week = now.startOf('isoWeek');
 
           if ('week' in params) {
-            week = moment(params['week']).startOf('isoWeek');
+            week = moment(params.week).startOf('isoWeek');
           }
 
           return {
@@ -50,7 +50,7 @@ export class CampusComponent {
   }
 
   selectDay(date: moment.Moment | null) {
-    this.router.navigate(['/campus', this.campus, 'd', dayToIso(<moment.Moment>date)])
+    this.router.navigate(['/campus', this.campus, 'd', dayToIso(date as moment.Moment)])
   }
 }
 

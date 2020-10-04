@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {merge, Observable, of, Subject} from "rxjs";
-import {AppConfigService} from "../service-app-config/app-config.service";
-import {SubscriptionService} from "../subscription.service";
-import {SwPush} from "@angular/service-worker";
-import {catchError, map, take, takeUntil} from "rxjs/operators";
+import {merge, Observable, of, Subject} from 'rxjs';
+import {AppConfigService} from '../service-app-config/app-config.service';
+import {SubscriptionService} from '../subscription.service';
+import {SwPush} from '@angular/service-worker';
+import {catchError, map, take, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-subscription-button',
@@ -56,7 +56,7 @@ export class SubscriptionButtonComponent implements OnInit, OnDestroy {
   subscribeToNotifications() {
     console.log('VAPID key:', this.VAPID_PUBLIC_KEY);
     this.swPush.requestSubscription({
-      serverPublicKey: <string>this.VAPID_PUBLIC_KEY
+      serverPublicKey: this.VAPID_PUBLIC_KEY as string
     }).then(sub => this.subscriptionService.subscriptionCreated(sub).pipe(take(1)).subscribe())
       .catch(err => console.error('Could not subscribe to notifications', err));
   }

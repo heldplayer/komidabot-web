@@ -1,8 +1,8 @@
-import * as moment from "moment";
-import {ClosingDay} from "./entities";
-import {formatDate} from "@angular/common";
-import {OperatorFunction, pipe} from "rxjs";
-import {TranslateService} from "@ngx-translate/core";
+import * as moment from 'moment';
+import {ClosingDay} from './entities';
+import {formatDate} from '@angular/common';
+import {OperatorFunction, pipe} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 export function dayToIso(day: moment.Moment): string {
   return day.format('YYYY-MM-DD');

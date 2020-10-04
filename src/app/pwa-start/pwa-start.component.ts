@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {SettingsService} from "../service-settings/settings.service";
-import {take} from "rxjs/operators";
-import {CampusService} from "../campus.service";
-import {ApiResponse} from "../entities";
-import * as moment from "moment";
-import {dayToIso} from "../utils";
+import {Router} from '@angular/router';
+import {SettingsService} from '../service-settings/settings.service';
+import {take} from 'rxjs/operators';
+import {CampusService} from '../campus.service';
+import {ApiResponse} from '../entities';
+import * as moment from 'moment';
+import {dayToIso} from '../utils';
 
 @Component({
   selector: 'app-pwa-start',

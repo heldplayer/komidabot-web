@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ApiResponse, ClosingDay, courseIcons, CourseSubType, CourseType, MenuItem} from "../../entities";
-import {combineLatest, Observable, ReplaySubject} from "rxjs";
-import {distinctUntilChanged, map, startWith, switchMap} from "rxjs/operators";
-import {CampusService} from "../../campus.service";
-import * as moment from "moment";
-import {dayToIso, getClosedDisplay, getNextWeekDay, getPreviousWeekDay} from "../../utils";
-import {TranslateService} from "@ngx-translate/core";
-import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import {ApiResponse, ClosingDay, courseIcons, CourseSubType, CourseType, MenuItem} from '../../entities';
+import {combineLatest, Observable, ReplaySubject} from 'rxjs';
+import {distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
+import {CampusService} from '../../campus.service';
+import * as moment from 'moment';
+import {dayToIso, getClosedDisplay, getNextWeekDay, getPreviousWeekDay} from '../../utils';
+import {TranslateService} from '@ngx-translate/core';
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu-display',
@@ -90,8 +90,8 @@ export class MenuDisplayComponent {
             const closed: ClosingDay | null = data[1];
 
             return {
-              menu: menu,
-              closed: closed
+              menu,
+              closed
             };
           })
         )
@@ -114,7 +114,7 @@ export class MenuDisplayComponent {
   }
 
   getIconURL(item: MenuItem): string {
-    return `/assets/twemoji/${courseIcons[<CourseType>item.course_type][<CourseSubType>item.course_sub_type]}.png`;
+    return `/assets/twemoji/${courseIcons[item.course_type as CourseType][item.course_sub_type as CourseSubType]}.png`;
   }
 
   getIconDescription(item: MenuItem): string {
@@ -122,10 +122,10 @@ export class MenuDisplayComponent {
   }
 
   getTranslation(item: MenuItem): string {
-    if (this.translate.currentLang == 'nl') {
-      return item.translation['nl'] || 'Missing translation';
+    if (this.translate.currentLang === 'nl') {
+      return item.translation.nl || 'Missing translation';
     } else {
-      return item.translation['en'] || item.translation['nl'] || 'Missing translation';
+      return item.translation.en || item.translation.nl || 'Missing translation';
     }
   }
 

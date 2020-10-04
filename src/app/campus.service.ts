@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {
   ApiResponse,
   Campus,
@@ -11,11 +11,11 @@ import {
   DayClosings,
   MenuItem,
   MenuResponse
-} from "./entities";
-import {AppConfigService} from "./service-app-config/app-config.service";
-import {concatMap, map, pluck, shareReplay, switchMap, tap} from "rxjs/operators";
-import * as moment from "moment";
-import {unsafeCast} from "./utils";
+} from './entities';
+import {AppConfigService} from './service-app-config/app-config.service';
+import {concatMap, map, pluck, shareReplay, switchMap, tap} from 'rxjs/operators';
+import * as moment from 'moment';
+import {unsafeCast} from './utils';
 
 const httpGetOptions = {
   headers: new HttpHeaders({
@@ -53,10 +53,10 @@ export class CampusService {
     return this.campuses$;
   }
 
-  getCampus(short_name: string): Observable<ApiResponse<Campus>> {
+  getCampus(shortName: string): Observable<ApiResponse<Campus>> {
     return this.campuses$.pipe(
       ApiResponse.pipe(
-        map(campuses => <Campus>campuses.find(campus => campus.short_name === short_name))
+        map(campuses => campuses.find(campus => campus.short_name === shortName) as Campus)
       ),
     );
   }
@@ -64,7 +64,7 @@ export class CampusService {
   getCampusById(id: number): Observable<ApiResponse<Campus>> {
     return this.campuses$.pipe(
       ApiResponse.pipe(
-        map(campuses => <Campus>campuses.find(campus => campus.id === id))
+        map(campuses => campuses.find(campus => campus.id === id) as Campus)
       ),
     );
   }
@@ -160,7 +160,7 @@ export class CampusService {
       }
     }
 
-    if (observables.length != 5) {
+    if (observables.length !== 5) {
       observables = [];
 
       const data = this.configService.config.pipe(

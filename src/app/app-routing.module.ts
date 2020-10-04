@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ErrorPageComponent} from "./error-page/error-page.component";
-import {CampusComponent} from "./campus/campus.component";
-import {PwaStartComponent} from "./pwa-start/pwa-start.component";
-import {ImageListComponent} from "./image-list/image-list.component";
-import {SettingsComponent} from "./settings/settings.component";
-import {MenuOverviewComponent} from "./menu-overview/menu-overview.component";
-import {CampusListComponent} from "./campus-list/campus-list.component";
+import {ErrorPageComponent} from './error-page/error-page.component';
+import {CampusComponent} from './campus/campus.component';
+import {PwaStartComponent} from './pwa-start/pwa-start.component';
+import {ImageListComponent} from './image-list/image-list.component';
+import {SettingsComponent} from './settings/settings.component';
+import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
+import {CampusListComponent} from './campus-list/campus-list.component';
 
 
 const routes: Routes = [

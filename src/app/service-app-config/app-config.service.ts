@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable, ReplaySubject} from "rxjs";
-import {default as configJsonDev} from "./config-dev.json";
-import {default as configJson} from "./config.json";
+import {Observable, ReplaySubject} from 'rxjs';
+import {default as configJsonDev} from './config-dev.json';
+import {default as configJson} from './config.json';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AppConfigService {
     const queryParams = getQueryParams();
     const isDev = queryParams.has('dev') && queryParams.get('dev') === 'true';
 
-    let config = <AppConfig>(isDev ? configJsonDev : configJson);
+    const config = (isDev ? configJsonDev : configJson) as AppConfig;
 
     console.log('App config:', config);
 

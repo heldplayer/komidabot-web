@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {AppConfigService} from "./service-app-config/app-config.service";
-import {concatMap} from "rxjs/operators";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {AppConfigService} from './service-app-config/app-config.service';
+import {concatMap} from 'rxjs/operators';
 
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
+    Authorization: 'my-auth-token'
   })
 };
 
@@ -35,10 +35,10 @@ export class SubscriptionService {
       concatMap(config => {
         const subscriptionJson = subscription.toJSON();
         const data = {
-          'subscription': {
-            'endpoint': subscriptionJson['endpoint'],
-            'keys': subscriptionJson['keys'],
-            'days': [3, 3, 3, 3, 3]
+          subscription: {
+            endpoint: subscriptionJson.endpoint,
+            keys: subscriptionJson.keys,
+            days: [3, 3, 3, 3, 3]
           }
         };
 

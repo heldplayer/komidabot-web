@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {SettingsService} from "../service-settings/settings.service";
-import {CampusService} from "../campus.service";
-import {ApiResponse, Campus} from "../entities";
-import {map} from "rxjs/operators";
-import {AppConfigService} from "../service-app-config/app-config.service";
+import {Observable} from 'rxjs';
+import {SettingsService} from '../service-settings/settings.service';
+import {CampusService} from '../campus.service';
+import {ApiResponse, Campus} from '../entities';
+import {map} from 'rxjs/operators';
+import {AppConfigService} from '../service-app-config/app-config.service';
 
 @Component({
   selector: 'app-settings',
@@ -83,11 +83,11 @@ class CampusSelectionInfo {
   }
 
   public setValue(element: EventTarget) {
-    const value = (<HTMLOptionElement>element).value;
+    const value = (element as HTMLOptionElement).value;
     if (value === 'null') {
       this.setter(null);
     }
-    this.setter(parseInt(value));
+    this.setter(parseInt(value, 10));
   }
 }
 

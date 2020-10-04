@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {timer} from "rxjs";
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'app-splash-screen',
@@ -10,6 +10,9 @@ export class SplashScreenComponent implements OnInit {
 
   // loading = false;
   closing = false;
+
+  @Output()
+  delete: EventEmitter<string> = new EventEmitter();
 
   constructor() {
   }
@@ -24,9 +27,6 @@ export class SplashScreenComponent implements OnInit {
     timer(150) // Emits only once
       .subscribe(() => this.closeSplash());
   }
-
-  @Output()
-  delete: EventEmitter<string> = new EventEmitter();
 
   closeSplash() {
     this.closing = true;

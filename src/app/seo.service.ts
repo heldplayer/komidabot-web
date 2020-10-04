@@ -1,9 +1,9 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {Meta, Title} from "@angular/platform-browser";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Observable, of, ReplaySubject, Subject} from "rxjs";
-import {switchMap, takeUntil} from "rxjs/operators";
-import {TranslateService} from "@ngx-translate/core";
+import {Meta, Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'

@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CheckForUpdateService} from "./check-for-update.service";
-import {DeviceDetectorService} from "ngx-device-detector";
-import {SwUpdate} from "@angular/service-worker";
-import {Observable, Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {SettingsService} from "./service-settings/settings.service";
-import {Router} from "@angular/router";
-import {faCog} from "@fortawesome/free-solid-svg-icons";
-import {SeoService} from "./seo.service";
+import {CheckForUpdateService} from './check-for-update.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
+import {SwUpdate} from '@angular/service-worker';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {SettingsService} from './service-settings/settings.service';
+import {Router} from '@angular/router';
+import {faCog} from '@fortawesome/free-solid-svg-icons';
+import {SeoService} from './seo.service';
 
 @Component({
   selector: 'app-component',
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private settings: SettingsService,
     private seo: SeoService,
   ) {
-    this.displaySplash = window.location.pathname == '/pwa_start';
+    this.displaySplash = window.location.pathname === '/pwa_start';
 
     this.updates.available
       .pipe(
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const ua = this.deviceService.userAgent;
     // Add custom check for facebook, as it's not possible to add the app to your homescreen from their browser
-    const isFacebook = ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1;
+    const isFacebook = ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1;
 
     this.deviceInfo = {
       user_agent: this.deviceService.userAgent,
