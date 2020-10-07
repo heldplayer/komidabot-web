@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {courseIcons, CourseSubType, CourseType} from '../entities';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-image-list',
@@ -7,58 +9,33 @@ import {Component} from '@angular/core';
 })
 export class ImageListComponent {
 
-  images: Image[] = [
-    {
-      url: '/assets/twemoji/1f375-alt.png',
-      description: 'Soup',
-    },
-    {
-      url: '/assets/twemoji/1f375-alt-vegan.png',
-      description: 'Soup Vegan',
-    },
-    {
-      url: '/assets/twemoji/1f354.png',
-      description: 'Daily',
-    },
-    {
-      url: '/assets/twemoji/1f354-vegan.png',
-      description: 'Daily Vegan',
-    },
-    {
-      url: '/assets/twemoji/1f35d.png',
-      description: 'Pasta',
-    },
-    {
-      url: '/assets/twemoji/1f35d-vegan.png',
-      description: 'Pasta Vegan',
-    },
-    {
-      url: '/assets/twemoji/1f969.png',
-      description: 'Grill',
-    },
-    {
-      url: '/assets/twemoji/1f969-vegan.png',
-      description: 'Grill Vegan',
-    },
-    {
-      url: '/assets/twemoji/1f957.png',
-      description: 'Salad',
-    },
-    {
-      url: '/assets/twemoji/1f957-vegan.png',
-      description: 'Salad Vegan',
-    },
-    {
-      url: '/assets/twemoji/1f956.png',
-      description: 'Sub',
-    },
-    {
-      url: '/assets/twemoji/1f956-vegan.png',
-      description: 'Sub Vegan',
-    },
-  ];
+  images: Image[] = [];
 
-  constructor() {
+  constructor(
+    private translate: TranslateService,
+  ) {
+    this.images.push({
+      // language=file-reference
+      url: '/assets/twemoji/indicator_warning.svg',
+      description: translate.instant('MENU.PROVISIONAL')
+    }, {
+      // language=file-reference
+      url: '/assets/twemoji/indicator_closed.svg',
+      description: translate.instant('CAMPUS.CLOSED.DESCRIPTION')
+    }, {
+      // language=file-reference
+      url: '/assets/twemoji/indicator_go-to-today.svg',
+      description: translate.instant('CAMPUS_LIST.GO.DESCRIPTION')
+    });
+
+    for (let i = CourseType.SOUP; i <= CourseType.SUB; ++i) {
+      for (let j = CourseSubType.NORMAL; j <= CourseSubType.VEGAN; ++j) {
+        this.images.push({
+          url: courseIcons[i][j],
+          description: translate.instant(`COURSE_ICON.DESCRIPTION.${i}.${j}`)
+        })
+      }
+    }
   }
 
 }

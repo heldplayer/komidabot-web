@@ -141,7 +141,7 @@ export class CampusDayMenuComponent implements OnInit, OnDestroy, SeoCompatible 
   }
 
   getIconURL(item: MenuItem): string {
-    return `/assets/twemoji/${courseIcons[item.course_type as CourseType][item.course_sub_type as CourseSubType]}.png`;
+    return courseIcons[item.course_type as CourseType][item.course_sub_type as CourseSubType];
   }
 
   getIconDescription(item: MenuItem): string {

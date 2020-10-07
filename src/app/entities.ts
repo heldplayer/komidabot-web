@@ -36,33 +36,41 @@ export const enum CourseType {
 
 export const enum CourseSubType {
   NORMAL = 1,
-  VEGAN = 2,
+  VEGETARIAN = 2,
+  VEGAN = 3,
 }
 
+// language=file-reference
 export const courseIcons = {
   [CourseType.SOUP]: {
-    [CourseSubType.NORMAL]: '1f375-alt',
-    [CourseSubType.VEGAN]: '1f375-alt-vegan',
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_soup.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_soup-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_soup-vegan.svg',
   },
   [CourseType.DAILY]: {
-    [CourseSubType.NORMAL]: '1f354',
-    [CourseSubType.VEGAN]: '1f354-vegan',
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_daily.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_daily-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_daily-vegan.svg',
   },
   [CourseType.PASTA]: {
-    [CourseSubType.NORMAL]: '1f35d',
-    [CourseSubType.VEGAN]: '1f35d-vegan',
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_pasta.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_pasta-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_pasta-vegan.svg',
   },
   [CourseType.GRILL]: {
-    [CourseSubType.NORMAL]: '1f969',
-    [CourseSubType.VEGAN]: '1f969-vegan',
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_grill.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_grill-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_grill-vegan.svg',
   },
   [CourseType.SALAD]: {
-    [CourseSubType.NORMAL]: '1f957',
-    [CourseSubType.VEGAN]: '1f957-vegan',
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_salad.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_salad-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_salad-vegan.svg',
   },
   [CourseType.SUB]: {
-    [CourseSubType.NORMAL]: '1f956',
-    [CourseSubType.VEGAN]: '1f956-vegan',
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_sub.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_sub-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_sub-vegan.svg',
   },
 };
 

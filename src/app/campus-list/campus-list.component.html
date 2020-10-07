@@ -19,7 +19,7 @@
               <span role="text">
                 <span class="card-title d-block m-0">
                   <img *ngIf="isCampusClosed(campusInfo)"
-                       src="/assets/twemoji/274c.png"
+                       src="/assets/twemoji/indicator_closed.svg"
                        class="emoji"
                        aria-hidden="true" role="none"/>
                   <span *ngIf="isCampusClosed(campusInfo)"
@@ -36,7 +36,7 @@
             <ng-template #noSubscript>
               <span class="card-title d-block m-2" role="text">
                 <img *ngIf="isCampusClosed(campusInfo)"
-                     src="/assets/twemoji/274c.png"
+                     src="/assets/twemoji/indicator_closed.svg"
                      class="emoji"
                      role="none"/>
 
@@ -55,7 +55,8 @@
              style="line-height: 100%;"
              [routerLink]="['/campus', campusInfo.campus.short_name, 'd', dayForUrl(today)]"
              [attr.aria-label]="'CAMPUS_LIST.GO.DESCRIPTION' | translate:translateInformation(campusInfo)">
-            <img class="mx-3 my-2 flex-shrink-0" style="width: 2em; height: 2em;" src="/assets/twemoji/23e9.png"
+            <img class="mx-3 my-2 flex-shrink-0" style="width: 2em; height: 2em;"
+                 src="/assets/twemoji/indicator_go-to-today.svg"
                  role="none"/>
           </a>
         </div>
