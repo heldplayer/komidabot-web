@@ -2,9 +2,9 @@
   <a class="ml-2 ml-md-3 mr-2" [routerLink]="['/']"
      [attr.aria-label]="'NAV.START.DESCRIPTION' | translate">Start</a>
   <span role="separator" aria-hidden="true">/</span>
-  <a *ngIf="campusName$ | async as name"
+  <span *ngIf="campusName$ | async as name"
      class="ml-2 text-truncate"
-     [attr.aria-label]="'NAV.CAMPUS.DESCRIPTION' | translate:{campus: name}">{{name}}</a>
+     [attr.aria-label]="'NAV.CAMPUS.DESCRIPTION' | translate:{campus: name}">{{name}}</span>
 </ng-template>
 
 <app-tabbed-container [navigation]="navigation" [tabInfo]="displayTabInfo">
