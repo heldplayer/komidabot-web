@@ -1,26 +1,27 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ErrorPageComponent} from './error-page/error-page.component';
-import {CampusComponent} from './campus/campus.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
 import {ImageListComponent} from './image-list/image-list.component';
 import {SettingsComponent} from './settings/settings.component';
 import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
 import {CampusListComponent} from './campus-list/campus-list.component';
+import {DebugComponent} from './debug/debug.component';
+import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
+import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
 
 
 const routes: Routes = [
   {path: '', component: CampusListComponent, pathMatch: 'full'},
   {path: 'pwa_start', component: PwaStartComponent, pathMatch: 'full'},
-  // {path: 'base', component: WebBaseComponent},
-  // {path: 'debug', component: DebugComponent},
+  {path: 'debug', component: DebugComponent},
   // {path: 'error-page', component: ErrorPageComponent},
   {path: 'images', component: ImageListComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'overview/:date', component: MenuOverviewComponent},
-  {path: 'campus/:campus/d/:date', component: CampusComponent},
-  {path: 'campus/:campus/w/:week', component: CampusComponent},
-  {path: 'campus/:campus', component: CampusComponent},
+  {path: 'campus/:campus/d/:date', component: CampusDayMenuComponent},
+  {path: 'campus/:campus/w/:week', component: CampusDaysListComponent},
+  {path: 'campus/:campus', component: CampusDaysListComponent},
   {path: '**', component: ErrorPageComponent},
 ];
 

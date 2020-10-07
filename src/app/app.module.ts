@@ -9,13 +9,10 @@ import {environment} from '../environments/environment';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {AppConfigService} from './service-app-config/app-config.service';
 import {HttpClientModule} from '@angular/common/http';
-import {CampusComponent} from './campus/campus.component';
 import {SplashScreenComponent} from './splash-screen/splash-screen.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
 import {CampusListComponent} from './campus-list/campus-list.component';
 import {SubscriptionButtonComponent} from './subscription-button/subscription-button.component';
-import {DaysDisplayComponent} from './campus/days-display/days-display.component';
-import {MenuDisplayComponent} from './campus/menu-display/menu-display.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
@@ -27,6 +24,9 @@ import {SettingsComponent} from './settings/settings.component';
 import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {LanguageLoader} from './service-settings/language-loader';
+import {TabbedContainerComponent} from './tabbed-container/tabbed-container.component';
+import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
+import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
 
 
 registerLocaleData(localeEn, 'en');
@@ -36,23 +36,24 @@ registerLocaleData(localeNl, 'nl');
 @NgModule({
   declarations: [
     AppComponent,
+    CampusDayMenuComponent,
+    CampusDaysListComponent,
+    CampusListComponent,
     DebugComponent,
     ErrorPageComponent,
-    MenuDisplayComponent,
-    CampusComponent,
-    SplashScreenComponent,
-    PwaStartComponent,
-    CampusListComponent,
-    SubscriptionButtonComponent,
-    DaysDisplayComponent,
-    LocalizedDatePipe,
     ImageListComponent,
-    SettingsComponent,
+    LocalizedDatePipe,
     MenuOverviewComponent,
+    PwaStartComponent,
+    SettingsComponent,
+    SplashScreenComponent,
+    SubscriptionButtonComponent,
+    TabbedContainerComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    FontAwesomeModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     TranslateModule.forRoot({
@@ -62,10 +63,8 @@ registerLocaleData(localeNl, 'nl');
         useClass: LanguageLoader
       },
     }),
-    FontAwesomeModule,
   ],
   providers: [
-    // FacebookMessengerService,
     {
       provide: APP_INITIALIZER,
       multi: true,

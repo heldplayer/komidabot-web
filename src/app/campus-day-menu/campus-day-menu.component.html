@@ -1,48 +1,13 @@
-<div class="card mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 mt-md-4" style="overflow: hidden;"
-     role="main">
-  <!-- Header -->
-  <div class="card-header py-2 px-2 d-flex align-items-center border-bottom-0 pb-2"
-       style="height: 2.5rem;"
-       role="navigation" aria-owns="navigation_previous navigation_title navigation_next">
+<ng-template #navigation>
+  <a class="ml-2 ml-md-3 mr-2" [routerLink]="['/']"
+     [attr.aria-label]="'NAV.START.DESCRIPTION' | translate">Start</a>
+  <span role="separator" aria-hidden="true">/</span>
+  <a *ngIf="campusName$ | async as name"
+     class="ml-2 text-truncate" [routerLink]="['/campus', campus]"
+     [attr.aria-label]="'NAV.CAMPUS.DESCRIPTION' | translate:{campus: name}">{{name}}</a>
+</ng-template>
 
-    <a class="ml-2 ml-md-3 mr-2" [routerLink]="['/']"
-       [attr.aria-label]="'NAV.START.DESCRIPTION' | translate">Start</a>
-    <span role="separator" aria-hidden="true">/</span>
-    <a *ngIf="campusName$ | async as name"
-       class="ml-2 text-truncate" [routerLink]="['/campus', campus]"
-       [attr.aria-label]="'NAV.CAMPUS.DESCRIPTION' | translate:{campus: name}">{{name}}</a>
-  </div>
-
-  <!-- Sub-header -->
-  <div class="card-header p-0 d-flex justify-content-between align-items-center">
-    <span (click)="selectDay(previousDay)"
-          class="btn btn-outline-dark px-3 py-2 btn-navigation"
-          role="button" tabindex="0" [attr.aria-label]="'MENU.PREVIOUS_DAY.LABEL' | translate"
-          id="navigation_previous">
-      <fa-icon [icon]="faChevronLeft"></fa-icon>
-    </span>
-
-    <span class="ml-2 text-truncate" id="navigation_title"
-          role="heading" aria-level="1"
-          [attr.aria-label]="'MENU.DESCRIPTION' | translate:({date:(day.toDate() | localizedDate)})">
-      {{day.toDate() | localizedDate : true}}
-    </span>
-
-    <span *ngIf="nextDay !== null; else disabledNextDay"
-          (click)="selectDay(nextDay)"
-          class="btn btn-outline-dark px-3 py-2 btn-navigation"
-          role="button" tabindex="0" [attr.aria-label]="'MENU.NEXT_DAY.LABEL' | translate"
-          id="navigation_next">
-      <fa-icon [icon]="faChevronRight"></fa-icon>
-    </span>
-    <ng-template #disabledNextDay>
-      <span class="btn btn-outline-dark disabled px-3 py-2 btn-navigation"
-            role="button" tabindex="0" [attr.aria-label]="'MENU.NEXT_DAY.LABEL' | translate" aria-disabled="true"
-            id="navigation_next">
-        <fa-icon [icon]="faChevronRight"></fa-icon>
-      </span>
-    </ng-template>
-  </div>
+<app-tabbed-container [navigation]="navigation" [tabInfo]="displayTabInfo">
 
   <!-- Body -->
   <ng-container *ngIf="menuInfo$ | async as menuInfo; else loadingMenu">
@@ -60,7 +25,7 @@
                class="list-group-item d-flex p-0 align-items-center highlightable-inside"
                tabindex="-1" role="text">
             <img class="ml-3 mr-1 my-2 flex-shrink-0" style="width: 2em; height: 2em;"
-                 src="/assets/twemoji/26a0.png"
+                 src="/src/assets/twemoji/26a0.png"
                  aria-hidden="true" role="none"/>
             <span class="item-name m-2 ml-0 mr-1">
               {{'MENU.PROVISIONAL' | translate}}
@@ -107,4 +72,5 @@
   <ng-template #loadingMenu>
     <div class="card-body">{{'MENU.LOADING' | translate}}</div>
   </ng-template>
-</div>
+
+</app-tabbed-container>

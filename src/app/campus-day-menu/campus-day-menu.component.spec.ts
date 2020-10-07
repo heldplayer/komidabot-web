@@ -1,16 +1,16 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DaysDisplayComponent} from './days-display.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {LanguageLoader} from '../../service-settings/language-loader';
-import {RouterTestingModule} from '@angular/router/testing';
+import {CampusDayMenuComponent} from './campus-day-menu.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {LocalizedDatePipe} from '../../localized-date.pipe';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {LanguageLoader} from '../service-settings/language-loader';
+import {RouterTestingModule} from '@angular/router/testing';
+import {LocalizedDatePipe} from '../localized-date.pipe';
 import {ServiceWorkerModule} from '@angular/service-worker';
 
-describe('DaysDisplayComponent', () => {
-  let component: DaysDisplayComponent;
-  let fixture: ComponentFixture<DaysDisplayComponent>;
+describe('CampusDayMenuComponent', () => {
+  let component: CampusDayMenuComponent;
+  let fixture: ComponentFixture<CampusDayMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe('DaysDisplayComponent', () => {
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: false})
       ],
       declarations: [
-        DaysDisplayComponent,
+        CampusDayMenuComponent,
         LocalizedDatePipe
       ]
     })
@@ -35,7 +35,7 @@ describe('DaysDisplayComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DaysDisplayComponent);
+    fixture = TestBed.createComponent(CampusDayMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

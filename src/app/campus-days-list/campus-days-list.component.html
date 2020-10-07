@@ -1,0 +1,35 @@
+<ng-template #navigation>
+  <a class="ml-2 ml-md-3 mr-2" [routerLink]="['/']"
+     [attr.aria-label]="'NAV.START.DESCRIPTION' | translate">Start</a>
+  <span role="separator" aria-hidden="true">/</span>
+  <a *ngIf="campusName$ | async as name"
+     class="ml-2 text-truncate"
+     [attr.aria-label]="'NAV.CAMPUS.DESCRIPTION' | translate:{campus: name}">{{name}}</a>
+</ng-template>
+
+<app-tabbed-container [navigation]="navigation" [tabInfo]="displayTabInfo">
+
+  <div class="list-group list-group-flush" *ngIf="days$ | async as days">
+    <a *ngFor="let info of days"
+       [routerLink]="['/campus', campus, 'd', dayForUrl(info.day)]"
+       class="list-group-item day-item highlightable-inside"
+       [class.closed]="isCampusClosed(info)">
+      <span role="text">
+        <span class="card-title d-block m-0">
+          <img *ngIf="isCampusClosed(info)"
+               src="/src/assets/twemoji/274c.png"
+               class="emoji"
+               aria-hidden="true" role="none"/>
+          <span *ngIf="isCampusClosed(info)"
+                [attr.aria-label]="'CAMPUS.CLOSED.DESCRIPTION' | translate"></span>
+          {{info.day.toDate() | localizedDate : true}}
+        </span>
+        <ng-container *ngIf="getDaySubscript(info) as subscript">
+          <span aria-label="."></span>
+          <span class="card-subtitle d-block m-0 day-subtitle">{{subscript}}</span>
+        </ng-container>
+      </span>
+    </a>
+  </div>
+
+</app-tabbed-container>

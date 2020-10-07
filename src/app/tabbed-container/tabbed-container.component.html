@@ -1,0 +1,58 @@
+<div class="card mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 mt-md-4" style="overflow: hidden;"
+     role="main">
+  <!-- Header -->
+  <div class="card-header py-2 px-2 d-flex align-items-center border-bottom-0 pb-2"
+       style="height: 2.5rem;"
+       role="navigation" aria-owns="navigation_previous navigation_title navigation_next">
+
+    <!-- TODO: Navigation crumbs -->
+    <ng-template [ngTemplateOutlet]="navigation"></ng-template>
+  </div>
+
+  <!-- Sub-header -->
+  <div class="card-header p-0 d-flex justify-content-between align-items-center">
+
+    <ng-container *ngIf="previousLink as link">
+      <a *ngIf="link.url; else noPrevious"
+         [routerLink]="link.url"
+         class="btn btn-outline-dark px-3 py-2 btn-navigation"
+         role="button" tabindex="0" [attr.aria-label]="link.description | async"
+         id="navigation_previous">
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
+      </a>
+      <ng-template #noPrevious>
+        <span class="btn btn-outline-dark disabled px-3 py-2 btn-navigation disabled"
+              role="button" tabindex="0" [attr.aria-label]="link.description | async" aria-disabled="true"
+              id="navigation_previous">
+          <fa-icon [icon]="faChevronLeft"></fa-icon>
+        </span>
+      </ng-template>
+    </ng-container>
+
+    <div *ngIf="(tabTitle | async) as title" id="navigation_title"
+         role="heading" aria-level="1"
+         [attr.aria-label]="tabDescription | async">
+      {{title}}
+    </div>
+
+    <ng-container *ngIf="nextLink as link">
+      <a *ngIf="link.url; else noNext"
+         [routerLink]="link.url"
+         class="btn btn-outline-dark px-3 py-2 btn-navigation"
+         role="button" tabindex="0" [attr.aria-label]="link.description | async"
+         id="navigation_next">
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </a>
+      <ng-template #noNext>
+        <span class="btn btn-outline-dark disabled px-3 py-2 btn-navigation disabled"
+              role="button" tabindex="0" [attr.aria-label]="link.description | async" aria-disabled="true"
+              id="navigation_next">
+          <fa-icon [icon]="faChevronRight"></fa-icon>
+        </span>
+      </ng-template>
+    </ng-container>
+
+  </div>
+
+  <ng-content></ng-content>
+</div>

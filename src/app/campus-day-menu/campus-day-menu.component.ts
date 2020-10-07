@@ -1,21 +1,23 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ApiResponse, ClosingDay, courseIcons, CourseSubType, CourseType, MenuItem} from '../../entities';
-import {combineLatest, Observable, ReplaySubject} from 'rxjs';
-import {distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
-import {CampusService} from '../../campus.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ApiResponse, ClosingDay, courseIcons, CourseSubType, CourseType, MenuItem} from '../entities';
+import {combineLatest, Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {distinctUntilChanged, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {CampusService} from '../campus.service';
 import * as moment from 'moment';
-import {dayToIso, getClosedDisplay, getNextWeekDay, getPreviousWeekDay} from '../../utils';
+import {dayToIso, getClosedDisplay, getNextWeekDay, getPreviousWeekDay} from '../utils';
 import {TranslateService} from '@ngx-translate/core';
-import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {SeoCompatible, SeoProvider} from '../seo.service';
+import {NavigationTabInfo} from '../tabbed-container/tabbed-container.component';
+import {DateTranslationService} from '../date-translation.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
-  selector: 'app-menu-display',
-  templateUrl: './menu-display.component.html',
-  styleUrls: ['./menu-display.component.scss']
+  selector: 'app-campus-day-menu',
+  templateUrl: './campus-day-menu.component.html',
+  styleUrls: ['./campus-day-menu.component.scss']
 })
-export class MenuDisplayComponent {
-  faChevronLeft = faChevronLeft;
-  faChevronRight = faChevronRight;
+export class CampusDayMenuComponent implements OnInit, OnDestroy, SeoCompatible {
+  private unsubscribe$ = new Subject<void>();
 
   menuInfo$: Observable<ApiResponse<MenuInfo>>;
   campusName$: Observable<string>;
@@ -65,12 +67,11 @@ export class MenuDisplayComponent {
     return this.translate.currentLang;
   }
 
-  @Output()
-  daySelected: EventEmitter<moment.Moment> = new EventEmitter();
-
   constructor(
+    private route: ActivatedRoute,
     private campusService: CampusService,
     private translate: TranslateService,
+    private dateTranslation: DateTranslationService,
   ) {
     this.menuInfo$ = combineLatest([this.campusSubject.asObservable(), this.daySubject.asObservable()])
       .pipe(
@@ -102,15 +103,41 @@ export class MenuDisplayComponent {
         switchMap(campus => this.campusService.getCampus(campus)
           .pipe(
             ApiResponse.awaitReady(),
-            map(campus => campus.name),
+            map(campusInfo => campusInfo.name),
             startWith(campus),
           )
         ),
       );
   }
 
-  dayForUrl(day: moment.Moment): string {
-    return dayToIso(day);
+  ngOnInit() {
+    this.route.params
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((params: Params) => {
+        this.campus = params.campus;
+        this.day = moment(params.date);
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  get displayTabInfo(): NavigationTabInfo {
+    const title = this.dateTranslation.transform(this.day.toDate(), true);
+    return {
+      previous: {
+        url: ['/campus', this.campus, 'd', dayToIso(this.previousDay as moment.Moment)],
+        description: this.translate.get('MENU.PREVIOUS_DAY.LABEL')
+      },
+      next: {
+        url: this.nextDay ? ['/campus', this.campus, 'd', dayToIso(this.nextDay as moment.Moment)] : undefined,
+        description: this.translate.get('MENU.NEXT_DAY.LABEL')
+      },
+      title: title !== '' ? of(title) : undefined,
+      titleDescription: title !== '' ? this.translate.get('MENU.DESCRIPTION', {date: title}) : undefined
+    };
   }
 
   getIconURL(item: MenuItem): string {
@@ -160,10 +187,19 @@ export class MenuDisplayComponent {
     return this.weekStart > now && now.isoWeekday() <= 4;
   }
 
-  selectDay(date: moment.Moment | null) {
-    if (date) {
-      this.daySelected.emit(date);
-    }
+  get seoProvider(): SeoProvider {
+    return {
+      title: this.campusName$.pipe(
+        switchMap((campusName) =>
+          this.day != null ?
+            this.translate.get('BROWSER.TITLE.MENU', {
+              campus: campusName,
+              date: this.dateTranslation.transform(this.day.toDate(), true)
+            }) : of(null)
+        )
+      ),
+      description: of(undefined),
+    };
   }
 }
 

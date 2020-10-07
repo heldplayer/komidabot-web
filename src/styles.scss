@@ -28,6 +28,7 @@ img.emoji {
 @import "~bootstrap/scss/navbar";
 @import "~bootstrap/scss/card";
 @import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/utilities";
 
 //@import 'node_modules/bootstrap/scss/bootstrap';
@@ -42,6 +43,12 @@ img.emoji {
   color: $white;
   background-color: $dark;
   border-color: $dark;
+}
+
+.btn-navigation.disabled, .btn-navigation:disabled {
+  color: $dark;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .highlightable-inside {

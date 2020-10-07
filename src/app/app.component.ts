@@ -33,7 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     // Add here to force starting this service
     private updateService: CheckForUpdateService,
-    // private messengerService: FacebookMessengerService,
     private settings: SettingsService,
     private seo: SeoService,
   ) {

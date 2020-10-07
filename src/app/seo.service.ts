@@ -28,15 +28,15 @@ export class SeoService implements OnDestroy {
 
     appConfig$
       .pipe(
-        switchMap((provider: SeoProvider | undefined) => provider ? provider.title : of(undefined))
+        switchMap((provider: SeoProvider | undefined) => provider?.title || of(undefined))
       )
-      .subscribe((title: string | undefined) => {
-        this.updateTitle(title);
+      .subscribe((pageTitle: string | undefined) => {
+        this.updateTitle(pageTitle);
       });
 
     appConfig$
       .pipe(
-        switchMap((provider: SeoProvider | undefined) => provider ? provider.description : of(undefined))
+        switchMap((provider: SeoProvider | undefined) => provider?.description || of(undefined))
       )
       .subscribe((description: string | undefined) => {
         this.updateDescription(description);

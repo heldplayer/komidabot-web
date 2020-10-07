@@ -1,21 +1,22 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import {CampusService} from '../../campus.service';
-import {combineLatest, Observable, ReplaySubject} from 'rxjs';
-import {distinctUntilChanged, map, startWith, switchMap} from 'rxjs/operators';
-import {ApiResponse, ClosingDay, ClosingDays} from '../../entities';
-import {dayToIso, getClosedDisplay} from '../../utils';
+import {CampusService} from '../campus.service';
+import {combineLatest, Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {distinctUntilChanged, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {ApiResponse, ClosingDay, ClosingDays} from '../entities';
+import {dayToIso, getClosedDisplay} from '../utils';
 import {TranslateService} from '@ngx-translate/core';
-import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {SeoCompatible, SeoProvider} from '../seo.service';
+import {NavigationTabInfo} from '../tabbed-container/tabbed-container.component';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-days-display',
-  templateUrl: './days-display.component.html',
-  styleUrls: ['./days-display.component.scss']
+  templateUrl: './campus-days-list.component.html',
+  styleUrls: ['./campus-days-list.component.scss']
 })
-export class DaysDisplayComponent {
-  faChevronLeft = faChevronLeft;
-  faChevronRight = faChevronRight;
+export class CampusDaysListComponent implements OnInit, OnDestroy, SeoCompatible {
+  private unsubscribe$ = new Subject<void>();
 
   days$: Observable<DayInfo[]>;
   campusName$: Observable<string>;
@@ -59,6 +60,7 @@ export class DaysDisplayComponent {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private campusService: CampusService,
     private translate: TranslateService,
   ) {
@@ -86,11 +88,37 @@ export class DaysDisplayComponent {
         switchMap(campus => this.campusService.getCampus(campus)
           .pipe(
             ApiResponse.awaitReady(),
-            map(campus => campus.name),
+            map(campusInfo => campusInfo.name),
             startWith(campus),
           )
         ),
       );
+  }
+
+  ngOnInit() {
+    this.route.params
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((params: Params) => {
+        this.campus = params.campus;
+        this.weekStart = 'week' in params ? moment(params.week) : moment().startOf('isoWeek');
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  get displayTabInfo(): NavigationTabInfo {
+    return {
+      previous: {
+        url: ['/campus', this.campus, 'w', dayToIso(this.previousWeek)]
+      },
+      next: {
+        url: this.nextWeek ? ['/campus', this.campus, 'w', dayToIso(this.nextWeek)] : undefined
+      },
+      title: this.weekDescription
+    };
   }
 
   get days(): moment.Moment[] {
@@ -104,7 +132,7 @@ export class DaysDisplayComponent {
     return days;
   }
 
-  get weekDescription(): string {
+  get weekDescription(): Observable<string> | undefined {
     /*
      *                                  now
      *                     v             v             v
@@ -116,24 +144,24 @@ export class DaysDisplayComponent {
     const now = moment();
 
     if (this.previousWeek <= now && now < this._weekStart) {
-      return 'WEEK.NEXT';
+      return this.translate.get('WEEK.NEXT');
     }
 
     if (this.nextWeek === null) {
-      return '';
+      return;
     }
 
     if (this._weekStart <= now && now < this.nextWeek) {
-      return 'WEEK.CURRENT';
+      return this.translate.get('WEEK.CURRENT');
     }
 
     const nextNextWeek = this.nextWeek.clone().add(1, 'week');
 
     if (this.nextWeek <= now && now < nextNextWeek) {
-      return 'WEEK.PREVIOUS';
+      return this.translate.get('WEEK.PREVIOUS');
     }
 
-    return '';
+    return;
   }
 
   isCampusClosed(info: DayInfo): boolean {
@@ -146,6 +174,19 @@ export class DaysDisplayComponent {
 
   dayForUrl(day: moment.Moment): string {
     return dayToIso(day);
+  }
+
+  get seoProvider(): SeoProvider {
+    return {
+      title: this.campusName$.pipe(
+        switchMap((campusName) =>
+          this.translate.get('BROWSER.TITLE.WEEK', {
+            campus: campusName
+          })
+        )
+      ),
+      description: of(undefined),
+    };
   }
 }
 
