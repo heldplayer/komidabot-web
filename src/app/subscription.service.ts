@@ -5,7 +5,7 @@ import {AppConfigService} from './service-app-config/app-config.service';
 import {concatMap} from 'rxjs/operators';
 
 
-const httpOptions = {
+const httpPostOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: 'my-auth-token'
@@ -42,7 +42,7 @@ export class SubscriptionService {
           }
         };
 
-        return this.http.post<any>(config.subscriptions_endpoint, data, httpOptions);
+        return this.http.post<any>(config.subscriptions_endpoint, data, httpPostOptions);
       })
     );
   }

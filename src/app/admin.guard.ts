@@ -1,24 +1,16 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AppConfigService} from './service-app-config/app-config.service';
+import {AppConfig, AppConfigService} from './service-app-config/app-config.service';
 import {catchError, concatMap, map} from 'rxjs/operators';
-import {SecureApiResponse} from './entities';
 import {TranslateService} from '@ngx-translate/core';
-
-const httpGetOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
+import {SecureApiResponse} from './entities';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
   constructor(
-    private http: HttpClient,
     private configService: AppConfigService,
     private translate: TranslateService,
   ) {
@@ -28,8 +20,38 @@ export class AdminGuard implements CanActivate {
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return this.configService.config.pipe(
-      concatMap(config => {
-        return this.http.get<SecureApiResponse>(`${config.api_secure_endpoint}authorized?ngsw-bypass`, httpGetOptions);
+      concatMap((config) => {
+        return new Observable<AppConfig>(subscriber => {
+          const frame = document.createElement('iframe');
+          frame.setAttribute('csp', `default-src 'self'; style-src 'self' 'unsafe-inline'`);
+          frame.style.position = 'absolute';
+          frame.style.left = '-1000px';
+          frame.style.top = '-1000px';
+          frame.style.width = '1px';
+          frame.style.height = '1px';
+          frame.addEventListener('load', () => {
+            const response = frame.contentDocument?.documentElement.innerText;
+            frame.remove();
+
+            if (response) {
+              try {
+                const parsed = JSON.parse(response) as SecureApiResponse;
+                console.log(parsed);
+                if (parsed.status === 200) {
+                  subscriber.next(config);
+                  subscriber.complete();
+                  return;
+                }
+              } catch (e) {
+              }
+            }
+            subscriber.error();
+            subscriber.complete();
+          });
+          frame.src = `${config.api_secure_endpoint}authorized?ngsw-bypass`;
+
+          document.body.appendChild(frame);
+        });
       }),
       map((_) => true),
       catchError((_) => {

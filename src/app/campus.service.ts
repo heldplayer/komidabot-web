@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
   ApiResponse,
@@ -17,11 +17,7 @@ import {concatMap, map, pluck, shareReplay, switchMap, tap} from 'rxjs/operators
 import * as moment from 'moment';
 import {unsafeCast} from './utils';
 
-const httpGetOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
+const httpGetOptions = {};
 
 @Injectable({
   providedIn: 'root'
