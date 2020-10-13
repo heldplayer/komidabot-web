@@ -46,6 +46,19 @@
       ]
     },
     {
+      "name": "non_cached",
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 0,
+        "maxAge": "0u",
+        "strategy": "freshness"
+      },
+      "urls": [
+        "/api-secure/*",
+        "/api-secure-dev/*"
+      ]
+    },
+    {
       "name": "non_changing",
       "version": 1,
       "cacheConfig": {

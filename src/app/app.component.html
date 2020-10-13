@@ -5,7 +5,7 @@
     <a class="mr-3 ml-auto d-block text-light text-center"
        style="font-size: 1.5rem; width: 2rem; height: 2rem; line-height: 2rem;"
        [routerLink]="['/settings']"
-       [attr.aria-label]="'SETTINGS.COG.DESCRIPTION' | translate">
+       [attr.aria-label]="'NAV.COG.DESCRIPTION' | translate">
       <fa-icon [icon]="faCog"></fa-icon>
     </a>
     <div *ngIf="language$ | async as language" class="btn-group btn-group-toggle" role="group">
@@ -24,6 +24,12 @@
     </div>
   </ng-container>
   <ng-template #settingsPage>
+    <a class="mr-3 ml-auto d-block text-light text-center"
+       style="font-size: 1.5rem; width: 2rem; height: 2rem; line-height: 2rem;"
+       [routerLink]="['/admin']"
+       [attr.aria-label]="'NAV.KEY.DESCRIPTION' | translate">
+      <fa-icon [icon]="faKey"></fa-icon>
+    </a>
     <a class="btn btn-light"
        [routerLink]="['/']">
       {{'SETTINGS.GO_BACK' | translate}}

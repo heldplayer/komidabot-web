@@ -6,7 +6,7 @@ import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {SettingsService} from './service-settings/settings.service';
 import {Router} from '@angular/router';
-import {faCog} from '@fortawesome/free-solid-svg-icons';
+import {faCog, faKey} from '@fortawesome/free-solid-svg-icons';
 import {SeoService} from './seo.service';
 
 @Component({
@@ -16,6 +16,7 @@ import {SeoService} from './seo.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   faCog = faCog;
+  faKey = faKey;
 
   private unsubscribe$ = new Subject<void>();
 

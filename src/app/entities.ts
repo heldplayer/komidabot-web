@@ -25,6 +25,11 @@ export interface ClosingDay {
   reason: Translation;
 }
 
+export interface SecureApiResponse {
+  status: number;
+  message: string;
+}
+
 export const enum CourseType {
   SOUP = 1,
   DAILY = 2,

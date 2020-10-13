@@ -37,6 +37,7 @@ export interface AppConfig {
   vapid_publicKey: string;
   subscriptions_endpoint: string;
   api_endpoint: string;
+  api_secure_endpoint: string;
 }
 
 function getQueryParams(): Map<string, string> {

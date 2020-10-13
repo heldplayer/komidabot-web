@@ -27,6 +27,7 @@ import {LanguageLoader} from './service-settings/language-loader';
 import {TabbedContainerComponent} from './tabbed-container/tabbed-container.component';
 import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
 import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
+import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 
 
 registerLocaleData(localeEn, 'en');
@@ -35,6 +36,7 @@ registerLocaleData(localeNl, 'nl');
 
 @NgModule({
   declarations: [
+    AdminPanelComponent,
     AppComponent,
     CampusDayMenuComponent,
     CampusDaysListComponent,
