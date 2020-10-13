@@ -1,33 +1,37 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-
-import {AppRoutingModule} from './app-routing.module';
-import {DebugComponent} from './debug/debug.component';
-import {AppComponent} from './app.component';
-import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
-import {ErrorPageComponent} from './error-page/error-page.component';
-import {AppConfigService} from './service-app-config/app-config.service';
-import {HttpClientModule} from '@angular/common/http';
-import {SplashScreenComponent} from './splash-screen/splash-screen.component';
-import {PwaStartComponent} from './pwa-start/pwa-start.component';
-import {CampusListComponent} from './campus-list/campus-list.component';
-import {SubscriptionButtonComponent} from './subscription-button/subscription-button.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
 import localeNl from '@angular/common/locales/nl';
-import {LocalizedDatePipe} from './localized-date.pipe';
-import {ImageListComponent} from './image-list/image-list.component';
-import {SettingsComponent} from './settings/settings.component';
-import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
+import {registerLocaleData} from '@angular/common';
+
+import {environment} from '../environments/environment';
+
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserModule} from '@angular/platform-browser';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {HttpClientModule} from '@angular/common/http';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+
 import {LanguageLoader} from './service-settings/language-loader';
-import {TabbedContainerComponent} from './tabbed-container/tabbed-container.component';
+
+import {AppConfigService} from './service-app-config/app-config.service';
+
+import {AdminPanelComponent} from './admin-panel/admin-panel.component';
+import {AppComponent} from './app.component';
 import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
 import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
-import {AdminPanelComponent} from './admin-panel/admin-panel.component';
+import {CampusListComponent} from './campus-list/campus-list.component';
+import {DebugComponent} from './debug/debug.component';
+import {ErrorPageComponent} from './error-page/error-page.component';
+import {ImageListComponent} from './image-list/image-list.component';
+import {LocalizedDatePipe} from './localized-date.pipe';
+import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
+import {PwaStartComponent} from './pwa-start/pwa-start.component';
+import {SettingsComponent} from './settings/settings.component';
+import {SplashScreenComponent} from './splash-screen/splash-screen.component';
+import {SubscriptionButtonComponent} from './subscription-button/subscription-button.component';
+import {TabbedContainerComponent} from './tabbed-container/tabbed-container.component';
 
 
 registerLocaleData(localeEn, 'en');
