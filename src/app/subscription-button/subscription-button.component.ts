@@ -1,33 +1,30 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {merge, Observable, of, Subject} from 'rxjs';
-import {AppConfigService} from '../service-app-config/app-config.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {merge, Observable, of} from 'rxjs';
+import {AppConfig, CONFIG_TOKEN} from '../service-app-config/app-config.service';
 import {SubscriptionService} from '../subscription.service';
 import {SwPush} from '@angular/service-worker';
-import {catchError, map, take, takeUntil} from 'rxjs/operators';
+import {catchError, map, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-subscription-button',
   templateUrl: './subscription-button.component.html',
   styleUrls: ['./subscription-button.component.scss']
 })
-export class SubscriptionButtonComponent implements OnInit, OnDestroy {
-  private unsubscribe$ = new Subject<void>();
+export class SubscriptionButtonComponent implements OnInit {
 
   VAPID_PUBLIC_KEY: string | null = null;
 
   subscriptionState: Observable<{ subscribed: boolean, subscribable: boolean }>;
 
   constructor(
-    private configService: AppConfigService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
     private subscriptionService: SubscriptionService,
     private swPush: SwPush,
   ) {
   }
 
   ngOnInit(): void {
-    this.configService.config
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(config => this.VAPID_PUBLIC_KEY = config.vapid_publicKey);
+    this.VAPID_PUBLIC_KEY = this.config.vapid_publicKey
 
     this.subscriptionState = merge(
       of({subscribed: false, subscribable: false}),
@@ -41,11 +38,6 @@ export class SubscriptionButtonComponent implements OnInit, OnDestroy {
         })
       )
     );
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   unsubscribe() {

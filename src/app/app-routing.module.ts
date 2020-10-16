@@ -10,7 +10,7 @@ import {DebugComponent} from './debug/debug.component';
 import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
 import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {LoginGuard} from './login/login.guard';
+import {LoginGuard} from './service-login/login.guard';
 import {LoginComponent} from './login/login.component';
 
 

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AppConfigService} from '../service-app-config/app-config.service';
 import {map} from 'rxjs/operators';
 import {LoginService} from './login.service';
 
@@ -11,7 +10,6 @@ import {LoginService} from './login.service';
 export class LoginGuard implements CanActivate {
   constructor(
     private router: Router,
-    private configService: AppConfigService,
     private loginService: LoginService,
   ) {
   }

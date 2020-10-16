@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AppConfigService} from './service-app-config/app-config.service';
-import {concatMap} from 'rxjs/operators';
+import {AppConfig, CONFIG_TOKEN} from './service-app-config/app-config.service';
 
 
 const httpPostOptions = {
@@ -18,7 +17,7 @@ const httpPostOptions = {
 export class SubscriptionService {
 
   constructor(
-    private configService: AppConfigService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
     private http: HttpClient,
   ) {
   }
@@ -31,19 +30,15 @@ export class SubscriptionService {
     console.log('Created subscription:', subscription);
     console.log(JSON.stringify(subscription.toJSON()));
 
-    return this.configService.config.pipe(
-      concatMap(config => {
-        const subscriptionJson = subscription.toJSON();
-        const data = {
-          subscription: {
-            endpoint: subscriptionJson.endpoint,
-            keys: subscriptionJson.keys,
-            days: [3, 3, 3, 3, 3]
-          }
-        };
+    const subscriptionJson = subscription.toJSON();
+    const data = {
+      subscription: {
+        endpoint: subscriptionJson.endpoint,
+        keys: subscriptionJson.keys,
+        days: [3, 3, 3, 3, 3]
+      }
+    };
 
-        return this.http.post<any>(config.subscriptions_endpoint, data, httpPostOptions);
-      })
-    );
+    return this.http.post<any>(this.config.subscriptions_endpoint, data, httpPostOptions);
   }
 }

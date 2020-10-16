@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Observable, of} from 'rxjs';
 import {SettingsService} from '../service-settings/settings.service';
 import {CampusService} from '../campus.service';
 import {ApiResponse, Campus} from '../entities';
 import {map} from 'rxjs/operators';
-import {AppConfigService} from '../service-app-config/app-config.service';
+import {AppConfig, CONFIG_TOKEN} from '../service-app-config/app-config.service';
 
 @Component({
   selector: 'app-settings',
@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     private settings: SettingsService,
     private campusService: CampusService,
-    private appConfig: AppConfigService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
   ) {
     this.language$ = this.settings.getLanguage();
     this.startup$ = this.settings.getStartup()
@@ -58,9 +58,7 @@ export class SettingsComponent implements OnInit {
         ApiResponse.awaitReady(),
       );
 
-    this.showSubscriptionButton$ = this.appConfig.config.pipe(
-      map(config => config.api_endpoint === '/api-dev/')
-    );
+    this.showSubscriptionButton$ = of(this.config.api_endpoint === '/api-dev/');
   }
 
   ngOnInit(): void {

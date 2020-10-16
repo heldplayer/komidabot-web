@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AppConfigService} from '../service-app-config/app-config.service';
+import {AppConfig, CONFIG_TOKEN} from '../service-app-config/app-config.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SecureApiResponse} from '../entities';
 import {catchError, map} from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
-    private configService: AppConfigService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
   ) {
   }
 
@@ -28,7 +28,7 @@ export class LoginService {
 
     const body = {username, password};
 
-    return this.http.post<SecureApiResponse>(`${this.configService.get().api_secure.login_endpoint}?ngsw-bypass`, body, httpPostOptions)
+    return this.http.post<SecureApiResponse>(`${this.config.api_secure.login_endpoint}?ngsw-bypass`, body, httpPostOptions)
       .pipe(
         map((response) => response.status === 200),
         catchError((_) => [false])
@@ -36,7 +36,7 @@ export class LoginService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.http.get<SecureApiResponse>(`${this.configService.get().api_secure.authorized_endpoint}?ngsw-bypass`, httpGetOptions)
+    return this.http.get<SecureApiResponse>(`${this.config.api_secure.authorized_endpoint}?ngsw-bypass`, httpGetOptions)
       .pipe(
         map((response) => response.status === 200),
         catchError((_) => [false])

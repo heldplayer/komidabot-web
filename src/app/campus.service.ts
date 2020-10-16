@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
@@ -12,8 +12,8 @@ import {
   MenuItem,
   MenuResponse
 } from './entities';
-import {AppConfigService} from './service-app-config/app-config.service';
-import {concatMap, map, pluck, shareReplay, switchMap, tap} from 'rxjs/operators';
+import {AppConfig, CONFIG_TOKEN} from './service-app-config/app-config.service';
+import {map, pluck, shareReplay, switchMap, tap} from 'rxjs/operators';
 import * as moment from 'moment';
 import {unsafeCast} from './utils';
 
@@ -30,16 +30,11 @@ export class CampusService {
 
   constructor(
     private http: HttpClient,
-    private configService: AppConfigService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
   ) {
 
-    this.campuses$ = this.configService.config.pipe(
-      concatMap(config => {
-        return this.http.get<CampusListResponse>(`${config.api_endpoint}campus`, httpGetOptions)
-          .pipe(
-            tap((result) => console.log('getting all campuses w/ response =', result))
-          );
-      }),
+    this.campuses$ = this.http.get<CampusListResponse>(`${this.config.api_endpoint}campus`, httpGetOptions).pipe(
+      tap((result) => console.log('getting all campuses w/ response =', result)),
       ApiResponse.convert<Campus[]>(),
       shareReplay(1),
     );
@@ -83,15 +78,10 @@ export class CampusService {
       ApiResponse.awaitReady(),
       switchMap((campuses: Campus[]) => {
 
-        const data = this.configService.config.pipe(
-          concatMap(config => {
-            const url = `${config.api_endpoint}campus/closing_days/${mondayString}`;
-            return this.http.get<ClosingDaysResponse>(url, httpGetOptions)
-              .pipe(
-                tap((result) => console.log(`getting all campus closing days w/ response =`, result)),
-              );
-          }),
-          // tap(x => console.log('getWeekClosingDays request gives', x)),
+        const url = `${this.config.api_endpoint}campus/closing_days/${mondayString}`;
+
+        const data = this.http.get<ClosingDaysResponse>(url, httpGetOptions).pipe(
+          tap((result) => console.log(`getting all campus closing days w/ response =`, result)),
           ApiResponse.convert<ClosingDaysResponse>(),
           shareReplay(1),
         );
@@ -159,14 +149,10 @@ export class CampusService {
     if (observables.length !== 5) {
       observables = [];
 
-      const data = this.configService.config.pipe(
-        concatMap(config => {
-          const url = `${config.api_endpoint}campus/${campus}/closing_days/${mondayString}`;
-          return this.http.get<ClosingDaysResponse>(url, httpGetOptions)
-            .pipe(
-              tap((result) => console.log(`getting campus ${campus} closing days w/ response =`, result)),
-            );
-        }),
+      const url = `${this.config.api_endpoint}campus/${campus}/closing_days/${mondayString}`;
+
+      const data = this.http.get<ClosingDaysResponse>(url, httpGetOptions).pipe(
+        tap((result) => console.log(`getting campus ${campus} closing days w/ response =`, result)),
         map((value: ClosingDaysResponse) => value[campus] || [null, null, null, null, null]),
         // tap(x => console.log('getWeekClosingDays request gives', x)),
         ApiResponse.convert<ClosingDays>(),
@@ -231,14 +217,10 @@ export class CampusService {
 
     let observable = campusCache.get(dayString);
     if (!observable) {
-      observable = this.configService.config.pipe(
-        concatMap(config => {
-          const url = `${config.api_endpoint}campus/${campus}/menu/${dayString}`;
-          return this.http.get<MenuResponse>(url, httpGetOptions)
-            .pipe(
-              tap((result) => console.log('getting menu w/ response =', result))
-            );
-        }),
+      const url = `${this.config.api_endpoint}campus/${campus}/menu/${dayString}`;
+
+      observable = this.http.get<MenuResponse>(url, httpGetOptions).pipe(
+        tap((result) => console.log('getting menu w/ response =', result)),
         // tap(x => console.log('getMenuForDay request gives', x)),
         ApiResponse.convert<MenuItem[]>(),
         shareReplay(1)

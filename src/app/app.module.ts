@@ -16,7 +16,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
 import {LanguageLoader} from './service-settings/language-loader';
 
-import {AppConfigService} from './service-app-config/app-config.service';
+import {AppConfig, AppConfigService, CONFIG_TOKEN} from './service-app-config/app-config.service';
 
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {AppComponent} from './app.component';
@@ -83,6 +83,13 @@ registerLocaleData(localeNl, 'nl');
         return () => {
           return configService.loadAppConfig();
         }
+      }
+    },
+    {
+      provide: CONFIG_TOKEN,
+      deps: [AppConfigService],
+      useFactory: (configService: AppConfigService): AppConfig => {
+        return configService.get();
       }
     },
   ],

@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Injectable, InjectionToken} from '@angular/core';
 import {default as configJsonDev} from './config-dev.json';
 import {default as configJson} from './config.json';
 
@@ -26,14 +25,12 @@ export class AppConfigService {
     return Promise.resolve(this.appConfig);
   }
 
-  get config(): Observable<AppConfig> {
-    return of(this.appConfig);
-  }
-
   get(): AppConfig {
     return this.appConfig;
   }
 }
+
+export const CONFIG_TOKEN = new InjectionToken<AppConfig>('App Configuration');
 
 export interface AppConfig {
   fb_appId: string;
