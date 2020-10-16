@@ -24,8 +24,6 @@ export class LoginService {
   }
 
   doLogin(username: string, password: string): Observable<boolean> {
-    console.log('Login', username, password);
-
     const body = {username, password};
 
     return this.http.post<SecureApiResponse>(`${this.config.api_secure.login_endpoint}?ngsw-bypass`, body, httpPostOptions)
