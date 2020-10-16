@@ -9,6 +9,7 @@ import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -26,6 +27,7 @@ import {DebugComponent} from './debug/debug.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {ImageListComponent} from './image-list/image-list.component';
 import {LocalizedDatePipe} from './localized-date.pipe';
+import {LoginComponent} from './login/login.component';
 import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
 import {SettingsComponent} from './settings/settings.component';
@@ -49,6 +51,7 @@ registerLocaleData(localeNl, 'nl');
     ErrorPageComponent,
     ImageListComponent,
     LocalizedDatePipe,
+    LoginComponent,
     MenuOverviewComponent,
     PwaStartComponent,
     SettingsComponent,
@@ -61,6 +64,7 @@ registerLocaleData(localeNl, 'nl');
     BrowserModule,
     FontAwesomeModule,
     HttpClientModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     TranslateModule.forRoot({
       defaultLanguage: 'nl',

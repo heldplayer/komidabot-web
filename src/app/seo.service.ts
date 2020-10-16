@@ -49,7 +49,7 @@ export class SeoService implements OnDestroy {
   }
 
   setActiveComponent(component: unknown) {
-    console.log(component);
+    // console.log(component);
     if (isSeoCompatible(component)) {
       this.provider.next(component.seoProvider);
     } else {
@@ -58,7 +58,7 @@ export class SeoService implements OnDestroy {
   }
 
   updateTitle(title?: string) {
-    console.log('Setting title to ', title);
+    // console.log('Setting title to ', title);
     if (title) {
       this.title.setTitle(title);
     } else {
@@ -67,7 +67,7 @@ export class SeoService implements OnDestroy {
   }
 
   updateDescription(description?: string) {
-    console.log('Setting description to ', description);
+    // console.log('Setting description to ', description);
     if (description) {
       this.meta.updateTag({name: 'description', content: description});
     } else {

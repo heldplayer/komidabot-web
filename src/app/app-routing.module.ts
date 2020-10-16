@@ -10,7 +10,8 @@ import {DebugComponent} from './debug/debug.component';
 import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
 import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {AdminGuard} from './admin.guard';
+import {LoginGuard} from './login/login.guard';
+import {LoginComponent} from './login/login.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'campus/:campus/d/:date', component: CampusDayMenuComponent},
   {path: 'campus/:campus/w/:week', component: CampusDaysListComponent},
   {path: 'campus/:campus', component: CampusDaysListComponent},
-  {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [LoginGuard]},
   {path: '**', component: ErrorPageComponent},
 ];
 

@@ -29,8 +29,8 @@ export class CampusService {
   private closedDaysCache = new Map<string, Map<string, Observable<ApiResponse<ClosingDay | null>>>>(); // campus -> day -> closed
 
   constructor(
-    private configService: AppConfigService,
     private http: HttpClient,
+    private configService: AppConfigService,
   ) {
 
     this.campuses$ = this.configService.config.pipe(

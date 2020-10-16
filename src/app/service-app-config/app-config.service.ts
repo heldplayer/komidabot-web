@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, ReplaySubject} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {default as configJsonDev} from './config-dev.json';
 import {default as configJson} from './config.json';
 
@@ -8,7 +8,7 @@ import {default as configJson} from './config.json';
 })
 export class AppConfigService {
 
-  private appConfig = new ReplaySubject<AppConfig>(1);
+  private appConfig: AppConfig;
 
   constructor() {
   }
@@ -21,14 +21,17 @@ export class AppConfigService {
 
     console.log('App config:', config);
 
-    this.appConfig.next(config);
-    this.appConfig.complete();
+    this.appConfig = config;
 
-    return Promise.resolve(config);
+    return Promise.resolve(this.appConfig);
   }
 
   get config(): Observable<AppConfig> {
-    return this.appConfig.asObservable();
+    return of(this.appConfig);
+  }
+
+  get(): AppConfig {
+    return this.appConfig;
   }
 }
 
@@ -37,7 +40,14 @@ export interface AppConfig {
   vapid_publicKey: string;
   subscriptions_endpoint: string;
   api_endpoint: string;
-  api_secure_endpoint: string;
+  api: {
+    subscription_endpoint: string;
+  };
+  api_secure: {
+    authorized_endpoint: string;
+    login_endpoint: string;
+    subscription_endpoint: string;
+  };
 }
 
 function getQueryParams(): Map<string, string> {

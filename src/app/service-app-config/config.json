@@ -3,5 +3,12 @@
   "vapid_publicKey": "BEm-ZsuMHlkHY-_FCz1ezwa5npPV91wcEjRh5I8S7CJgY_CYxphPwoCI1mgCLv2WyNXOWVSTNf-zq4zuQeU--wc",
   "subscriptions_endpoint": "/webhook/subscription",
   "api_endpoint": "/api/",
-  "api_secure_endpoint": "/api-secure/"
+  "api": {
+    "subscription_endpoint": "/api/subscribe"
+  },
+  "api_secure": {
+    "authorized_endpoint": "/api-secure/authorized",
+    "login_endpoint": "/api-secure/login",
+    "subscription_endpoint": "/api-secure/subscribe"
+  }
 }
