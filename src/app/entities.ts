@@ -25,7 +25,7 @@ export interface ClosingDay {
   reason: Translation;
 }
 
-export interface SecureApiResponse {
+export interface BaseApiResponse {
   status: number;
   message: string;
 }

@@ -1,5 +1,9 @@
 {
   "ADMIN.ACCESS_DENIED": "Access denied!",
+  "ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS": "Enable administrative notifications",
+  "ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS.ENABLED": "Administrative notifications are enabled",
+  "ADMIN.ACTIONS.TITLE": "Actions",
+  "ADMIN.ACTIONS.UPDATE_MENUS": "Update menus",
   "APP.COVID19_INFO_LINK": "https://www.uantwerpen.be/en/life-in-antwerp/catering/about-komida/online-ordering/",
   "APP.COVID19_UNAVAILABLE": "Dear user, online menus are currently unavailable. Click here to go to the information page of the Komida restaurants.",
   "APP.DOMAIN_CHANGE": "The bot has moved to komidabot.xyz, please update your links to this new domain.",

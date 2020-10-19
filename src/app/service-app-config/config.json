@@ -4,11 +4,8 @@
   "subscriptions_endpoint": "/webhook/subscription",
   "api_endpoint": "/api/",
   "api": {
+    "authorized_endpoint": "/api/authorized",
+    "login_endpoint": "/api/login",
     "subscription_endpoint": "/api/subscribe"
-  },
-  "api_secure": {
-    "authorized_endpoint": "/api-secure/authorized",
-    "login_endpoint": "/api-secure/login",
-    "subscription_endpoint": "/api-secure/subscribe"
   }
 }

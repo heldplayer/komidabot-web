@@ -38,9 +38,6 @@ export interface AppConfig {
   subscriptions_endpoint: string;
   api_endpoint: string;
   api: {
-    subscription_endpoint: string;
-  };
-  api_secure: {
     authorized_endpoint: string;
     login_endpoint: string;
     subscription_endpoint: string;

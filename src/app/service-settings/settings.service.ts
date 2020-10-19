@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {takeUntil, tap} from 'rxjs/operators';
+import {map, takeUntil, tap} from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Injectable({
@@ -33,6 +33,12 @@ export class SettingsService implements OnDestroy {
     this.setCampusWednesday(SettingsService.parseIntSafe(localStorage.getItem('preferences.campus3')));
     this.setCampusThursday(SettingsService.parseIntSafe(localStorage.getItem('preferences.campus4')));
     this.setCampusFriday(SettingsService.parseIntSafe(localStorage.getItem('preferences.campus5')));
+
+    try {
+      this.setSubscriptions(JSON.parse(localStorage.getItem('preferences.subscriptions') || '{}'));
+    } catch (e) {
+      this.setSubscriptions({});
+    }
   }
 
   ngOnDestroy(): void {
@@ -63,7 +69,7 @@ export class SettingsService implements OnDestroy {
     return parseInt(value, 10);
   }
 
-  private static toStringSafe(value: number | null): string | null {
+  private static intToStringSafe(value: number | null): string | null {
     if (value === null) {
       return null;
     }
@@ -122,7 +128,7 @@ export class SettingsService implements OnDestroy {
   }
 
   setCampusMonday(campus1: number | null) {
-    SettingsService.setOption('preferences.campus1', SettingsService.toStringSafe(campus1));
+    SettingsService.setOption('preferences.campus1', SettingsService.intToStringSafe(campus1));
     this.campus1Behaviour.next(campus1);
   }
 
@@ -138,7 +144,7 @@ export class SettingsService implements OnDestroy {
   }
 
   setCampusTuesday(campus2: number | null) {
-    SettingsService.setOption('preferences.campus2', SettingsService.toStringSafe(campus2));
+    SettingsService.setOption('preferences.campus2', SettingsService.intToStringSafe(campus2));
     this.campus2Behaviour.next(campus2);
   }
 
@@ -154,7 +160,7 @@ export class SettingsService implements OnDestroy {
   }
 
   setCampusWednesday(campus3: number | null) {
-    SettingsService.setOption('preferences.campus3', SettingsService.toStringSafe(campus3));
+    SettingsService.setOption('preferences.campus3', SettingsService.intToStringSafe(campus3));
     this.campus3Behaviour.next(campus3);
   }
 
@@ -170,7 +176,7 @@ export class SettingsService implements OnDestroy {
   }
 
   setCampusThursday(campus4: number | null) {
-    SettingsService.setOption('preferences.campus4', SettingsService.toStringSafe(campus4));
+    SettingsService.setOption('preferences.campus4', SettingsService.intToStringSafe(campus4));
     this.campus4Behaviour.next(campus4);
   }
 
@@ -186,7 +192,28 @@ export class SettingsService implements OnDestroy {
   }
 
   setCampusFriday(campus5: number | null) {
-    SettingsService.setOption('preferences.campus5', SettingsService.toStringSafe(campus5));
+    SettingsService.setOption('preferences.campus5', SettingsService.intToStringSafe(campus5));
     this.campus5Behaviour.next(campus5);
   }
+
+  // ==================================================
+  // Subscription settings
+  // ==================================================
+
+  private subscriptionsBehaviour = new ReplaySubject<SubscriptionSettings>(1);
+  private subscriptions$ = this.subscriptionsBehaviour.asObservable().pipe(
+    map((value) => Object.assign({}, value)) // XXX: Make sure changes to the returned value by subscribers does not have side effects
+  );
+
+  getSubscriptions(): Observable<SubscriptionSettings> {
+    return this.subscriptions$;
+  }
+
+  // NOTE: Unless you know what you're doing, don't call this method yourself, instead use the API in SubscriptionService.
+  setSubscriptions(subscriptions: SubscriptionSettings) {
+    SettingsService.setOption('preferences.subscriptions', JSON.stringify(subscriptions));
+    this.subscriptionsBehaviour.next(subscriptions);
+  }
 }
+
+export type SubscriptionSettings = Record<string, { enabled: boolean, data: unknown }>;

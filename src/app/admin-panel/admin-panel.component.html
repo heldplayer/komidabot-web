@@ -1,1 +1,32 @@
-<p>admin-panel works!</p>
+<div class="card mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 mt-md-4" style="overflow: hidden;"
+     role="main">
+  <!-- Header -->
+  <div class="card-header" role="heading" aria-level="1">
+    {{'ADMIN.ACTIONS.TITLE' | translate}}
+  </div>
+
+  <div class="card-body container p-3">
+
+    <div *ngIf="subscriptionState$ | async as state"
+         class="row mb-2">
+      <button *ngIf="state.subscribed; else unsubscribed"
+              class="btn btn-dark m-auto active"
+              (click)="unsubscribe()">
+        {{'ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS.ENABLED' | translate}}
+      </button>
+
+      <ng-template #unsubscribed>
+        <button class="btn btn-dark m-auto" [disabled]="!state.subscribable"
+                (click)="subscribe()">
+          {{'ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS' | translate}}
+        </button>
+      </ng-template>
+    </div>
+
+    <div class="row mb-2">
+      <button class="btn btn-dark m-auto" disabled>
+        {{'ADMIN.ACTIONS.UPDATE_MENUS' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
