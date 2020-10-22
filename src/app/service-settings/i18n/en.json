@@ -1,4 +1,5 @@
 {
+  "ABOUT": "About",
   "ADMIN.ACCESS_DENIED": "Access denied!",
   "ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS": "Enable administrative notifications",
   "ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS.ENABLED": "Administrative notifications are enabled",

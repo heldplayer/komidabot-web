@@ -18,6 +18,7 @@ import {LanguageLoader} from './service-settings/language-loader';
 
 import {AppConfig, AppConfigService, CONFIG_TOKEN} from './service-app-config/app-config.service';
 
+import {AboutComponent} from './about/about.component';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {AppComponent} from './app.component';
 import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
@@ -42,6 +43,7 @@ registerLocaleData(localeNl, 'nl');
 
 @NgModule({
   declarations: [
+    AboutComponent,
     AdminPanelComponent,
     AppComponent,
     CampusDayMenuComponent,
