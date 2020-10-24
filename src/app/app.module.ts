@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
 import localeNl from '@angular/common/locales/nl';
@@ -77,16 +77,6 @@ registerLocaleData(localeNl, 'nl');
     }),
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      deps: [AppConfigService],
-      useFactory: (configService: AppConfigService) => {
-        return () => {
-          return configService.loadAppConfig();
-        }
-      }
-    },
     {
       provide: CONFIG_TOKEN,
       deps: [AppConfigService],

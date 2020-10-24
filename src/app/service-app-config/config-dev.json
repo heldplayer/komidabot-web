@@ -1,11 +1,11 @@
 {
   "fb_appId": "1356185317877412",
   "vapid_publicKey": "BEm-ZsuMHlkHY-_FCz1ezwa5npPV91wcEjRh5I8S7CJgY_CYxphPwoCI1mgCLv2WyNXOWVSTNf-zq4zuQeU--wc",
-  "subscriptions_endpoint": "/webhook-dev/subscription",
-  "api_endpoint": "/api-dev/",
+  "subscriptions_endpoint": "/webhook/subscription",
+  "api_endpoint": "/api/",
   "api": {
-    "authorized_endpoint": "/api-dev/authorized",
-    "login_endpoint": "/api-dev/login",
-    "subscription_endpoint": "/api-dev/subscribe"
+    "authorized_endpoint": "/api/authorized",
+    "login_endpoint": "/api/login",
+    "subscription_endpoint": "/api/subscribe"
   }
 }
