@@ -11,7 +11,7 @@ export class AppConfigService {
   private appConfig: AppConfig;
 
   constructor() {
-    const config = (environment.production ? configJsonDev : configJson) as AppConfig;
+    const config = (environment.production ? configJson : configJsonDev) as AppConfig;
 
     console.log('App config:', config);
 
