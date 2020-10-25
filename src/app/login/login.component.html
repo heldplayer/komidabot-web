@@ -5,18 +5,7 @@
     {{'LOGIN.TITLE' | translate}}
   </div>
 
-  <form class="card-body container p-3" [formGroup]="loginForm" (ngSubmit)="login()">
-    <div class="form-group row align-items-center px-3">
-      <label class="col-md-3" for="login-username">{{'LOGIN.USERNAME' | translate}}</label>
-      <input type="text" class="col-md-9 form-control" id="login-username" formControlName="username"
-             [class.is-invalid]="loginForm.controls['username'].errors">
-    </div>
-    <div class="form-group row align-items-center px-3">
-      <label class="col-md-3" for="login-password">{{'LOGIN.PASSWORD' | translate}}</label>
-      <input type="password" class="col-md-9 form-control" id="login-password" formControlName="password"
-             [class.is-invalid]="loginForm.controls['password'].errors">
-    </div>
-    <button type="submit" class="btn btn-primary d-block ml-auto"
-            [disabled]="loginForm.invalid">{{'LOGIN.SUBMIT' | translate}}</button>
-  </form>
+  <div class="card-body">
+    {{'LOGIN.REDIRECTING' | translate}}
+  </div>
 </div>

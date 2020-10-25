@@ -1,43 +1,48 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../service-login/login.service';
-import {take} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {AppConfig, CONFIG_TOKEN} from '../service-app-config/app-config.service';
+import {Subject, timer} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit, OnDestroy {
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
     private route: ActivatedRoute,
-    private loginService: LoginService,
   ) {
-    this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(12)]],
-    });
   }
 
   ngOnInit(): void {
-  }
+    const base = new URL(window.location.protocol + '//' + window.location.host);
+    console.log('Base URL:', base.toString());
+    const next = new URL(this.route.snapshot.queryParamMap.get('next') || '/', base);
+    console.log('Next URL:', next.toString());
 
-  login() {
-    if (this.loginForm.valid) {
-      this.loginService.doLogin(this.loginForm.value.username, this.loginForm.value.password).pipe(
-        take(1)
-      ).subscribe(value => {
-        if (value) {
-          this.router.navigateByUrl(this.route.snapshot.queryParamMap.get('next') || '/');
-        }
-      });
+    const redirectUrl = new URL(this.config.api.login_endpoint, base);
+
+    if (next.host !== base.host || next.protocol !== base.protocol) {
+      console.error('Next URL is not on the same domain!');
+    } else {
+      redirectUrl.searchParams.set('next', next.pathname + next.search + next.hash);
     }
+
+    console.log('Redirect URL:', redirectUrl.toString());
+
+    timer(500).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(() => {
+      window.location.replace(redirectUrl.toString());
+    });
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

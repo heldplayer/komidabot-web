@@ -1,18 +1,6 @@
 {
-  "/api-secure": {
-    "target": "https://komidabot.xyz:443",
-    "pathRewrite": {
-      "^/api-secure": "/api-secure-dev"
-    },
-    "changeOrigin": true,
-    "hostRewrite": true,
-    "autoRewrite": true
-  },
   "/api": {
     "target": "https://komidabot.xyz:443",
-    "pathRewrite": {
-      "^/api": "/api-dev"
-    },
     "changeOrigin": true,
     "hostRewrite": true,
     "autoRewrite": true

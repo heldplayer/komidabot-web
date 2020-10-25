@@ -39,23 +39,7 @@
       "urls": [
         "/api/campus/closing_days/*",
         "/api/campus/*/closing_days/*",
-        "/api/campus/*/menu/*",
-        "/api-dev/campus/closing_days/*",
-        "/api-dev/campus/*/closing_days/*",
-        "/api-dev/campus/*/menu/*"
-      ]
-    },
-    {
-      "name": "non_cached",
-      "version": 1,
-      "cacheConfig": {
-        "maxSize": 0,
-        "maxAge": "0u",
-        "strategy": "freshness"
-      },
-      "urls": [
-        "/api-secure/*",
-        "/api-secure-dev/*"
+        "/api/campus/*/menu/*"
       ]
     },
     {
@@ -76,9 +60,6 @@
     "!/**/*.*",
     "!/**/*__*",
     "!/**/*__*/**",
-    "!/api/**",
-    "!/api-dev/**",
-    "!/api-secure/**",
-    "!/api-secure-dev/**"
+    "!/api/**"
   ]
 }

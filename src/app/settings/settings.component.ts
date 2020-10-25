@@ -58,7 +58,7 @@ export class SettingsComponent implements OnInit {
         ApiResponse.awaitReady(),
       );
 
-    this.showSubscriptionButton$ = of(this.config.api_endpoint === '/api-dev/');
+    this.showSubscriptionButton$ = of(false); // XXX: Not enabled right now
   }
 
   ngOnInit(): void {
