@@ -13,3 +13,4 @@ updates:
       - "heldplayer"
     ignore:
       - dependency-name: "@angular/*"
+      - dependency-name: "@types/*"
