@@ -19,10 +19,45 @@ export class LoginService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.http.get<BaseApiResponse>(`${this.config.api.authorized_endpoint}`, httpGetOptions)
+    return this.http.get<AuthorizedApiResponse>(`${this.config.api.authorized_endpoint}`, httpGetOptions)
       .pipe(
         map((response) => response.status === 200),
         catchError((_) => [false])
       );
   }
+
+  getLogin(): Observable<Login> {
+    return this.http.get<AuthorizedApiResponse>(`${this.config.api.authorized_endpoint}`, httpGetOptions)
+      .pipe(
+        map((response) => ({loggedIn: response.status === 200, roles: response.roles || []})),
+        catchError((_) => [{loggedIn: false, roles: []}])
+      );
+  }
+
+  rolesRequired(...roles: string[]): Observable<boolean> {
+    return this.http.get<AuthorizedApiResponse>(`${this.config.api.authorized_endpoint}`, httpGetOptions)
+      .pipe(
+        map((response) => {
+          if ('roles' in response && response.roles) {
+            for (const role of roles) {
+              if (!(role in response.roles)) {
+                return false
+              }
+            }
+            return true;
+          }
+          return false;
+        }),
+        catchError((_) => [false])
+      );
+  }
+}
+
+export interface Login {
+  loggedIn: boolean;
+  roles: string[];
+}
+
+interface AuthorizedApiResponse extends BaseApiResponse {
+  roles?: string[];
 }

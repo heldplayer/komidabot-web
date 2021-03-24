@@ -28,7 +28,7 @@ export class ImageListComponent {
       description: translate.instant('CAMPUS_LIST.GO.DESCRIPTION')
     });
 
-    for (let i = CourseType.SOUP; i <= CourseType.SUB; ++i) {
+    for (let i = CourseType.SOUP; i <= CourseType.SNACK; ++i) {
       for (let j = CourseSubType.NORMAL; j <= CourseSubType.VEGAN; ++j) {
         this.images.push({
           url: courseIcons[i][j],

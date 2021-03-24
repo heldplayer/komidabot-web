@@ -6,7 +6,7 @@ import {CampusService} from '../campus.service';
 import * as moment from 'moment';
 import {dayToIso, getClosedDisplay, getNextWeekDay, getPreviousWeekDay} from '../utils';
 import {TranslateService} from '@ngx-translate/core';
-import {SeoCompatible, SeoProvider} from '../seo.service';
+import {SeoProvider} from '../seo.service';
 import {NavigationTabInfo} from '../tabbed-container/tabbed-container.component';
 import {DateTranslationService} from '../date-translation.service';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -16,7 +16,7 @@ import {ActivatedRoute, Params} from '@angular/router';
   templateUrl: './campus-day-menu.component.html',
   styleUrls: ['./campus-day-menu.component.scss']
 })
-export class CampusDayMenuComponent implements OnInit, OnDestroy, SeoCompatible {
+export class CampusDayMenuComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   menuInfo$: Observable<ApiResponse<MenuInfo>>;
@@ -187,6 +187,7 @@ export class CampusDayMenuComponent implements OnInit, OnDestroy, SeoCompatible 
     return this.weekStart > now && now.isoWeekday() <= 4;
   }
 
+  // TODO: Doesn't work 100% correctly, need to look at this further
   get seoProvider(): SeoProvider {
     return {
       title: this.campusName$.pipe(

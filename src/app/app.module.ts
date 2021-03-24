@@ -29,6 +29,7 @@ import {ErrorPageComponent} from './error-page/error-page.component';
 import {ImageListComponent} from './image-list/image-list.component';
 import {LocalizedDatePipe} from './localized-date.pipe';
 import {LoginComponent} from './login/login.component';
+import {LoginErrorComponent} from './login/error/login-error.component';
 import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
 import {SettingsComponent} from './settings/settings.component';
@@ -54,6 +55,7 @@ registerLocaleData(localeNl, 'nl');
     ImageListComponent,
     LocalizedDatePipe,
     LoginComponent,
+    LoginErrorComponent,
     MenuOverviewComponent,
     PwaStartComponent,
     SettingsComponent,

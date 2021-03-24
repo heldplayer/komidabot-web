@@ -6,7 +6,7 @@ import {distinctUntilChanged, map, startWith, switchMap, takeUntil} from 'rxjs/o
 import {ApiResponse, ClosingDay, ClosingDays} from '../entities';
 import {dayToIso, getClosedDisplay} from '../utils';
 import {TranslateService} from '@ngx-translate/core';
-import {SeoCompatible, SeoProvider} from '../seo.service';
+import {SeoProvider} from '../seo.service';
 import {NavigationTabInfo} from '../tabbed-container/tabbed-container.component';
 import {ActivatedRoute, Params} from '@angular/router';
 
@@ -15,7 +15,7 @@ import {ActivatedRoute, Params} from '@angular/router';
   templateUrl: './campus-days-list.component.html',
   styleUrls: ['./campus-days-list.component.scss']
 })
-export class CampusDaysListComponent implements OnInit, OnDestroy, SeoCompatible {
+export class CampusDaysListComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   days$: Observable<DayInfo[]>;
@@ -176,6 +176,7 @@ export class CampusDaysListComponent implements OnInit, OnDestroy, SeoCompatible
     return dayToIso(day);
   }
 
+  // TODO: Doesn't work 100% correctly, need to look at this further
   get seoProvider(): SeoProvider {
     return {
       title: this.campusName$.pipe(

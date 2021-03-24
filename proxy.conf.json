@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://komidabot.xyz:443",
+    "target": "https://dev.komidabot.xyz:443",
     "changeOrigin": true,
     "hostRewrite": true,
     "autoRewrite": true

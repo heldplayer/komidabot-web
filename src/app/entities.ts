@@ -37,6 +37,8 @@ export const enum CourseType {
   GRILL = 4,
   SALAD = 5,
   SUB = 6,
+  DESSERT = 7,
+  SNACK = 8,
 }
 
 export const enum CourseSubType {
@@ -76,6 +78,16 @@ export const courseIcons = {
     [CourseSubType.NORMAL]: '/assets/twemoji/icon_sub.svg',
     [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_sub-vegetarian.svg',
     [CourseSubType.VEGAN]: '/assets/twemoji/icon_sub-vegan.svg',
+  },
+  [CourseType.DESSERT]: {
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_dessert.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_dessert-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_dessert-vegan.svg',
+  },
+  [CourseType.SNACK]: {
+    [CourseSubType.NORMAL]: '/assets/twemoji/icon_snack.svg',
+    [CourseSubType.VEGETARIAN]: '/assets/twemoji/icon_snack-vegetarian.svg',
+    [CourseSubType.VEGAN]: '/assets/twemoji/icon_snack-vegan.svg',
   },
 };
 

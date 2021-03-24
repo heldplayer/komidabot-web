@@ -10,6 +10,7 @@ import {DebugComponent} from './debug/debug.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {ImageListComponent} from './image-list/image-list.component';
 import {LoginComponent} from './login/login.component';
+import {LoginErrorComponent} from './login/error/login-error.component';
 import {LoginGuard} from './service-login/login.guard';
 import {MenuOverviewComponent} from './menu-overview/menu-overview.component';
 import {PwaStartComponent} from './pwa-start/pwa-start.component';
@@ -28,8 +29,9 @@ const routes: Routes = [
   {path: 'campus/:campus/d/:date', component: CampusDayMenuComponent},
   {path: 'campus/:campus/w/:week', component: CampusDaysListComponent},
   {path: 'campus/:campus', component: CampusDaysListComponent},
+  {path: 'login/:error', component: LoginErrorComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'admin', component: AdminPanelComponent, canActivate: [LoginGuard]},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [LoginGuard], data: {login: {roles: ['admin']}}},
   {path: '**', component: ErrorPageComponent},
 ];
 
