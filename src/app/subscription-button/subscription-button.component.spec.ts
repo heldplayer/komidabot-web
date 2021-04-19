@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {SubscriptionButtonComponent} from './subscription-button.component';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -9,7 +9,7 @@ describe('SubscriptionButtonComponent', () => {
   let component: SubscriptionButtonComponent;
   let fixture: ComponentFixture<SubscriptionButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,

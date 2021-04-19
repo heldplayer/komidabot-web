@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {MenuOverviewComponent} from './menu-overview.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -10,7 +10,7 @@ describe('MenuOverviewComponent', () => {
   let component: MenuOverviewComponent;
   let fixture: ComponentFixture<MenuOverviewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
@@ -23,9 +23,9 @@ describe('MenuOverviewComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule
       ],
-      declarations: [ MenuOverviewComponent ]
+      declarations: [MenuOverviewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

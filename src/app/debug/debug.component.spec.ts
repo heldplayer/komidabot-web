@@ -1,10 +1,10 @@
-import {async, TestBed} from '@angular/core/testing';
+import {TestBed, waitForAsync} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {DebugComponent} from './debug.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 
 describe('DebugComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,

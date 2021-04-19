@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {CampusDayMenuComponent} from './campus-day-menu.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -12,7 +12,7 @@ describe('CampusDayMenuComponent', () => {
   let component: CampusDayMenuComponent;
   let fixture: ComponentFixture<CampusDayMenuComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({

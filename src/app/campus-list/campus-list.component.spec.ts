@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {CampusListComponent} from './campus-list.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -10,7 +10,7 @@ describe('CampusListComponent', () => {
   let component: CampusListComponent;
   let fixture: ComponentFixture<CampusListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({

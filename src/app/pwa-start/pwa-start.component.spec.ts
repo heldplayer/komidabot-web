@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {PwaStartComponent} from './pwa-start.component';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -10,7 +10,7 @@ describe('PwaStartComponent', () => {
   let component: PwaStartComponent;
   let fixture: ComponentFixture<PwaStartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
