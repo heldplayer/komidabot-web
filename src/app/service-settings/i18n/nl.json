@@ -5,6 +5,8 @@
   "ADMIN.ACTIONS.SUBSCRIBE_ADMIN_NOTIFICATIONS.ENABLED": "Administratieve notificaties staan aan",
   "ADMIN.ACTIONS.TITLE": "Acties",
   "ADMIN.ACTIONS.UPDATE_MENUS": "Menu's bijwerken",
+  "APP.COOKIES.ACCEPT": "Begrepen",
+  "APP.COOKIES.BANNER": "Deze site maakt gebruik van lokale opslag om uw voorkeuren op te slaan.",
   "APP.COVID19_INFO_LINK": "https://uantwerpen.be/nl/studentenleven/eten/bestel-online/",
   "APP.COVID19_UNAVAILABLE": "Klik hier voor meer informatie over online bestellingen.",
   "APP.DOMAIN_CHANGE": "De bot is verhuisd naar komidabot.xyz, gelieve uw links aan te passen naar dit nieuwe domein.",

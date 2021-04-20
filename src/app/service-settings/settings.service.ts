@@ -25,6 +25,7 @@ export class SettingsService implements OnDestroy {
       )
       .subscribe(language => this.translate.use(language));
 
+    this.setCookiesAcknowledged(localStorage.getItem('preferences.cookiesAcknowledged') === '1');
     this.setLanguage(localStorage.getItem('preferences.language') || 'nl');
     this.setStartup(localStorage.getItem('preferences.startup') === '1');
 
@@ -82,6 +83,22 @@ export class SettingsService implements OnDestroy {
     } else {
       localStorage.setItem(key, value);
     }
+  }
+
+  // ==================================================
+  // Cookies acknowledged
+  // ==================================================
+
+  private cookiesAcknowledgedBehaviour = new ReplaySubject<boolean>(1);
+  private cookiesAcknowledged$ = this.cookiesAcknowledgedBehaviour.asObservable();
+
+  getCookiesAcknowledged(): Observable<boolean> {
+    return this.cookiesAcknowledged$;
+  }
+
+  setCookiesAcknowledged(cookiesAcknowledged: boolean) {
+    SettingsService.setOption('preferences.cookiesAcknowledged', cookiesAcknowledged ? '1' : '0');
+    this.cookiesAcknowledgedBehaviour.next(cookiesAcknowledged);
   }
 
   // ==================================================

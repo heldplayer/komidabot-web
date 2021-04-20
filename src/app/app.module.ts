@@ -24,6 +24,7 @@ import {AppComponent} from './app.component';
 import {CampusDayMenuComponent} from './campus-day-menu/campus-day-menu.component';
 import {CampusDaysListComponent} from './campus-days-list/campus-days-list.component';
 import {CampusListComponent} from './campus-list/campus-list.component';
+import {CookieBannerComponent} from './cookie-banner/cookie-banner.component';
 import {DebugComponent} from './debug/debug.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {ImageListComponent} from './image-list/image-list.component';
@@ -50,6 +51,7 @@ registerLocaleData(localeNl, 'nl');
     CampusDayMenuComponent,
     CampusDaysListComponent,
     CampusListComponent,
+    CookieBannerComponent,
     DebugComponent,
     ErrorPageComponent,
     ImageListComponent,

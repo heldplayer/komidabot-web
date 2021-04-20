@@ -1,0 +1,6 @@
+<div class="banner py-3 px-lg-5 px-md-4 px-3 d-flex justify-content-between align-items-center"
+     *ngIf="!(acknowledged$ | async)">
+  {{'APP.COOKIES.BANNER' | translate}}
+  <button class="btn btn-primary ml-3"
+          (click)="acknowledgeCookies()">{{'APP.COOKIES.ACCEPT' | translate}}</button>
+</div>
