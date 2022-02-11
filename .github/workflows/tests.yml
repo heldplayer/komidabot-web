@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 14.11
+          node-version: 14.19
 
       - name: Prepare
         run: npm install
