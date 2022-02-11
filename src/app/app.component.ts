@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CheckForUpdateService} from './check-for-update.service';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {SwUpdate} from '@angular/service-worker';
+import {SwUpdate, VersionReadyEvent} from '@angular/service-worker';
 import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {SettingsService} from './service-settings/settings.service';
 import {Router} from '@angular/router';
 import {faCog, faKey} from '@fortawesome/free-solid-svg-icons';
@@ -39,9 +39,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
     this.displaySplash = window.location.pathname === '/pwa_start';
 
-    this.updates.available
+    this.updates.versionUpdates
       .pipe(
-        takeUntil(this.unsubscribe$)
+        takeUntil(this.unsubscribe$),
+        filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY')
       )
       .subscribe(_ => this.updateAvailable = true);
 
@@ -90,7 +91,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   refreshPage() {
-    document.location.reload(true);
+    document.location.reload();
   }
 
   splashComplete() {

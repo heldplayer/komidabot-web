@@ -23,15 +23,17 @@ export class CheckForUpdateService {
         .pipe(
           tap(_ => console.log('Checking for updates'))
         )
-        .subscribe(() => updates.checkForUpdate());
+        .subscribe(() => updates.checkForUpdate().then(available => {
+          if (!available) {
+            console.log('No update available')
+          }
+        }));
 
-      updates.available.subscribe(event => {
-        console.log('current version is', event.current);
-        console.log('available version is', event.available);
-      });
-      updates.activated.subscribe(event => {
-        console.log('old version was', event.previous);
-        console.log('new version is', event.current);
+      updates.versionUpdates.subscribe(event => {
+        if (event.type === 'VERSION_READY') {
+          console.log('current version is', event.currentVersion);
+          console.log('available version is', event.latestVersion);
+        }
       });
     }
   }
