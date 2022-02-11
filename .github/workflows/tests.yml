@@ -24,4 +24,4 @@ jobs:
           npm install
 
       - name: Build
-        run: './node_modules/@angular/cli/bin/ng build --configuration=development'
+        run: npm run build --configuration="development"
