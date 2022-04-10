@@ -41,8 +41,10 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+
+# Local files
 venv/
-/deploy*.sh
+deploy*.ini
 
 # System Files
 .DS_Store
