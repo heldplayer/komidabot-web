@@ -24,7 +24,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@ngx-translate/core": "^14.0.0",
-    "bootstrap": "^4.6.1",
+    "bootstrap": "^5.2.3",
     "jquery": "^3.6.0",
     "moment": "~2.29.4",
     "ngx-device-detector": "^3.0.0",
